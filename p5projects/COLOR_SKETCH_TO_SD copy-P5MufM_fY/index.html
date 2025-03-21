@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    
+    
+
+  </head>
+  <body>
+    <main>
+      
+       <div id="canvas_drawing_container" >
+         
+         <div style="float:left;width:30%;">
+          <button id="send_btn" onclick="sendDIRECT();">Send</button>
+         <br>
+          <textarea id="promptInput" placeholder="Enter your prompt..." autofocus></textarea>
+         <br>
+         <label id="weight_label">controlnet_weight 0 - 1.6</label><br>
+         <input type="range" id="cn_weight" min="0" max="260" value="110">
+         <br>
+          <label>brush_size 1-100</label><br>
+         <input type="range" id="brush_size_slider" min="1" max="100" value="20">
+         <br>
+           <label>COL -10 -- 10</label><br>
+         <input type="range" id="brush_opacity_slider" min="-10" max="10" value="1">
+           
+         </div>
+       </div>
+      
+      
+     
+      
+           <!-- Div to hold the images once they are loaded -->
+  <div id="images-container"></div>
+      
+      <button id="redraw_btn" onclick="show_drawing_UI();">DRAW</button>
+      
+    </main>
+    <script src="sketch.js"></script>
+  </body>
+</html>

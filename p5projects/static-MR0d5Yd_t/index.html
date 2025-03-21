@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            pixelDensity(1);
+            noSmooth();
+        }
+
+        function draw() {
+            loadPixels();
+            
+            for (let i = 0; i < pixels.length; i += 4) {
+                const noiseValue = random(255);
+                pixels[i] = noiseValue;     // R
+                pixels[i + 1] = noiseValue; // G
+                pixels[i + 2] = noiseValue; // B
+                pixels[i + 3] = 100;        // A
+            }
+            
+            updatePixels();
+          
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: white;
+    }
+    
+    #container {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(16,1fr);
+      padding: 0px;
+    }
+    
+    .cell {
+      width: 100%;
+      height: 100%;
+      border: 0px;
+      border-radius: 0px;
+      transition: background 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    const gridSize = 16;
+    const container = document.getElementById('container');
+    let time = 0;
+    
+    // Create grid cells
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      container.appendChild(cell);
+    }
+    
+    function updateGradients() {
+      const cells = document.getElementsByClassName('cell');
+      // Calculate center of grid
+      const centerX = gridSize / 2;
+      const centerY = gridSize / 2;
+      
+      for (let i = 0; i < cells.length; i++) {
+        let x, y;
+        if (i < (cells.length/4)) {
+          x = i % gridSize;
+          y = Math.floor(-(i / gridSize));
+        } else if (i > (cells.length/4*2) && i < (cells.length/4*3)) {
+          x = i % gridSize;
+          y = Math.floor(-(i / gridSize));
+        } else {
+          x = -i % gridSize;
+          y = Math.floor(-(i / gridSize));
+        }
+        
+        // Calculate distance from center and angle
+        const currentX = i % gridSize;
+        const currentY = Math.floor(i / gridSize);
+        const dx = currentX - centerX;
+        const dy = currentY - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+        
+        // Create circular wave effect
+        const offsetX = Math.sin((time + distance * 15) * Math.PI / 120) * 2;
+        const offsetY = Math.cos((time + distance * 15) * Math.PI / 120) * 2;
+        
+        // Create dynamic hue values based on angle and distance
+        const baseHue1 = (time + (angle * 180 / Math.PI) + distance * 1) % 360;
+        const baseHue2 = (baseHue1 ) % 360;
+        
+        // Add wave pattern influence to gradient angle
+        const gradientAngle = (time + distance * 20 + 
+                      Math.sin((time + distance * 15) * Math.PI / 160)) % 360;
+        
+        // Apply gradient
+        cells[i].style.background = `linear-gradient(
+          ${gradientAngle}deg,
+          hsl(${baseHue1}, 70%, ${50 + offsetX * 10}%) 0%,
+          hsl(${baseHue2}, 70%, ${50 + offsetY * 10}%) 100%
+        )`;
+      }
+      
+      // Update time and request next frame
+      time += 1.1;
+      requestAnimationFrame(updateGradients);
+    }
+    
+    // Start animation
+    requestAnimationFrame(updateGradients);
+  </script>
+</body>
+</html>

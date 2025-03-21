@@ -1,0 +1,43 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  
+}
+
+
+#send_btn{
+  
+  position:fixed;
+  z-index:999;
+  bottom:0px;
+  right:0px;
+  
+  
+}
+
+#canvas_drawing_container{
+  
+  width:100%;
+  position:fixed;
+  z-index:999;
+  top:0px;
+  left:0px;
+  background-color:rgba(255,255,255,0.58);
+}
+
+
+#redraw_btn{
+  
+  position:fixed;
+  z-index:999;
+  top:0px;
+  right:0px;
+  
+  
+}

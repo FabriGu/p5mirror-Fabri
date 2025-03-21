@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genuary - Four Quadrant Grid Design</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+        }
+        canvas { 
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<script>
+let cells = 20; // number of cells per row in one quadrant
+let shapes = [];
+const CANVAS_SIZE = 800;
+const QUADRANT_SIZE = CANVAS_SIZE/2;
+
+class GridShape {
+    constructor(x, y, cellSize) {
+        this.x = x;
+        this.y = y;
+        this.cellSize = cellSize;
+        this.size = this.cellSize;
+        this.targetSize = random(this.cellSize * 0.9, this.cellSize);
+        this.hue = random(100,260);
+        this.speed = random(0.02, 0.02);
+        this.phase = random(PI);
+    }
+
+    update() {
+        this.size = lerp(this.size, this.targetSize, 0.1);
+        if (abs(this.size - this.targetSize) < 0.5) {
+            this.targetSize = random(this.cellSize * 0.2, this.cellSize);
+        }
+    }
+
+    display(mirrorX = false, mirrorY = false) {
+        push();
+        colorMode(HSB, 360, 100, 100);
+        let h = (this.hue + frameCount * 0.5) % 360;
+        fill(h, 80, 90);
+        noStroke();
+        
+        let xPos = this.x;
+        let yPos = this.y;
+        
+        // Handle horizontal mirroring
+        if (mirrorX) {
+            xPos = QUADRANT_SIZE + (QUADRANT_SIZE - this.x - this.cellSize);
+        }
+        
+        // Handle vertical mirroring
+        if (mirrorY) {
+            yPos = QUADRANT_SIZE + (QUADRANT_SIZE - this.y - this.cellSize);
+        }
+        
+        translate(xPos + this.cellSize/2, yPos + this.cellSize/2);
+        let wobble = sin(frameCount * this.speed + this.phase) * 3;
+        rectMode(CENTER);
+        rect(0, 0, this.size + wobble, this.size + wobble);
+        pop();
+    }
+}
+
+function createGrid() {
+    shapes = [];
+    let cellSize = QUADRANT_SIZE / cells;
+    
+    for (let x = 0; x < cells; x++) {
+        for (let y = 0; y < cells; y++) {
+            shapes.push(new GridShape(
+                x * cellSize,
+                y * cellSize,
+                cellSize
+            ));
+        }
+    }
+}
+
+function setup() {
+    createCanvas(CANVAS_SIZE, CANVAS_SIZE);
+    createGrid();
+}
+
+function draw() {
+    background(20);
+    
+    // Update and draw all four quadrants
+    for (let shape of shapes) {
+        shape.update();
+        // Top left (original)
+        shape.display(false, false);
+        // Top right (mirror X)
+        shape.display(true, false);
+        // Bottom left (mirror Y)
+        shape.display(false, true);
+        // Bottom right (mirror both)
+        shape.display(true, true);
+    }
+   
+    
+}
+
+function keyPressed() {
+    // Press up/down arrows to change grid size
+    if (keyCode === UP_ARROW && cells < 20) {
+        cells++;
+        createGrid();
+    } else if (keyCode === DOWN_ARROW && cells > 2) {
+        cells--;
+        createGrid();
+    }
+}
+</script>
+</body>
+</html>

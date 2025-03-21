@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+let engine;
+let world;
+let circles = [];
+let startPoint = null;
+let endPoint = null;
+let sliceLine = null;
+let originalRadius = 350;
+let colorPalette;
+let draggedColor = null;
+let draggedCircle = null;
+let dragOffset = { x: 0, y: 0 };
+
+class ColorPalette {
+    constructor() {
+        this.x = 20;
+        this.y = 20;
+        this.size = 40;
+        this.gap = 10;
+        this.colors = [
+            { r: 255, g: 50, b: 50 },   // Red
+            { r: 50, g: 255, b: 50 },   // Green
+            { r: 50, g: 50, b: 255 },   // Blue
+            { r: 255, g: 255, b: 50 },  // Yellow
+            { r: 255, g: 50, b: 255 },  // Magenta
+            { r: 50, g: 255, b: 255 }   // Cyan
+        ];
+    }
+
+    display() {
+        noStroke();
+        for (let i = 0; i < this.colors.length; i++) {
+            const c = this.colors[i];
+            fill(c.r, c.g, c.b);
+            rect(this.x, this.y + i * (this.size + this.gap), this.size, this.size);
+        }
+    }
+
+    checkClick(mx, my) {
+        for (let i = 0; i < this.colors.length; i++) {
+            if (mx > this.x && mx < this.x + this.size &&
+                my > this.y + i * (this.size + this.gap) && 
+                my < this.y + i * (this.size + this.gap) + this.size) {
+                return this.colors[i];
+            }
+        }
+        return null;
+    }
+}
+
+class LiquidCircle {
+    constructor(x, y, radius, color = { r: 100, g: 100, b: 255 }) {
+        this.radius = radius;
+        this.particles = [];
+        this.springs = [];
+        this.centerBody = null;
+        this.color = color;
+        this.colors = [color];
+        this.createParticles(x, y);
+    }
+
+    addColor(newColor) {
+        this.colors.push(newColor);
+        this.updateMixedColor();
+    }
+
+    updateMixedColor() {
+        let r = 0, g = 0, b = 0;
+        for (let c of this.colors) {
+            r += c.r;
+            g += c.g;
+            b += c.b;
+        }
+        const len = this.colors.length;
+        this.color = {
+            r: r / len,
+            g: g / len,
+            b: b / len
+        };
+    }
+
+    createParticles(x, y) {
+        // Scale number of particles with radius, with min and max limits
+        const baseCount = 20;  // Original count for large circles
+        const minCount = 12;   // Minimum number of particles
+        const scaleFactor = this.radius / originalRadius;
+        const particleCount = Math.max(minCount, Math.floor(baseCount * scaleFactor));
+        
+        const angleStep = (2 * PI) / particleCount;
+        
+        // Create center body with higher friction and no restitution
+        this.centerBody = Matter.Bodies.circle(x, y, 5, {
+            isStatic: false,
+            friction: 0.9,
+            restitution: 0,
+            density: 1
+        });
+        Matter.World.add(world, this.centerBody);
+
+        for (let i = 0; i < particleCount; i++) {
+            const angle = i * angleStep;
+            const px = x + cos(angle) * this.radius;
+            const py = y + sin(angle) * this.radius;
+            
+            // Create particles with same properties for rigidity
+            const particle = Matter.Bodies.circle(px, py, 10, {
+                friction: 0.9,
+                restitution: 0,
+                density: 1
+            });
+            
+            this.particles.push(particle);
+            Matter.World.add(world, particle);
+
+            // Stiffer springs for more rigid structure
+            const spring = Matter.Constraint.create({
+                bodyA: this.centerBody,
+                bodyB: particle,
+                stiffness: 0.1,  // Increased from 0.01
+                damping: 0.5,    // Increased from 0.1
+                length: this.radius  // Set explicit length
+            });
+            
+            this.springs.push(spring);
+            Matter.World.add(world, spring);
+
+            if (i > 0) {
+                const prevParticle = this.particles[i - 1];
+                const spring = Matter.Constraint.create({
+                    bodyA: prevParticle,
+                    bodyB: particle,
+                    stiffness: 0.1,  // Increased from 0.01
+                    damping: 0.5,    // Increased from 0.1
+                    length: 2 * this.radius * sin(angleStep/2)  // Correct length for circle arc
+                });
+                this.springs.push(spring);
+                Matter.World.add(world, spring);
+            }
+        }
+
+        // Connect first and last particles
+        const spring = Matter.Constraint.create({
+            bodyA: this.particles[0],
+            bodyB: this.particles[this.particles.length - 1],
+            stiffness: 0.1,
+            damping: 0.5,
+            length: 2 * this.radius * sin(angleStep/2)
+        });
+        this.springs.push(spring);
+        Matter.World.add(world, spring);
+    }
+
+    display() {
+        // Only draw the filled shape
+        beginShape();
+        fill(this.color.r, this.color.g, this.color.b, 200);
+        noStroke();
+        for (let particle of this.particles) {
+            vertex(particle.position.x, particle.position.y);
+        }
+        endShape(CLOSE);
+    }
+
+    remove() {
+        for (let particle of this.particles) {
+            Matter.World.remove(world, particle);
+        }
+        for (let spring of this.springs) {
+            Matter.World.remove(world, spring);
+        }
+        Matter.World.remove(world, this.centerBody);
+    }
+}
+
+function setup() {
+    createCanvas(1080 , 1080);
+    engine = Matter.Engine.create();
+    world = engine.world;
+    world.gravity.y = 0;
+    colorPalette = new ColorPalette();
+    circles.push(new LiquidCircle(width/2, height/2, originalRadius));
+}
+
+function draw() {
+    background(51);
+    Matter.Engine.update(engine);
+    
+    for (let circle of circles) {
+        circle.display();
+    }
+    
+    if (startPoint && endPoint) {
+        stroke(255);
+        strokeWeight(2);
+        line(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+    }
+
+    colorPalette.display();
+
+    if (draggedColor) {
+        fill(draggedColor.r, draggedColor.g, draggedColor.b);
+        noStroke();
+        circle(mouseX, mouseY, 30);
+    }
+}
+
+function mousePressed() {
+    const color = colorPalette.checkClick(mouseX, mouseY);
+    if (color) {
+        draggedColor = color;
+        return;
+    }
+
+    // Check if clicking on a circle
+    for (let circle of circles) {
+        const d = dist(mouseX, mouseY, 
+                     circle.centerBody.position.x, 
+                     circle.centerBody.position.y);
+        if (d < circle.radius) {
+            draggedCircle = circle;
+            dragOffset = {
+                x: circle.centerBody.position.x - mouseX,
+                y: circle.centerBody.position.y - mouseY
+            };
+            return;
+        }
+    }
+
+    // If not dragging anything, start drawing slice line
+    startPoint = createVector(mouseX, mouseY);
+}
+
+function mouseDragged() {
+    if (draggedColor) {
+        return;
+    }
+
+    if (draggedCircle) {
+        // Calculate the displacement from current to new position
+        const newX = mouseX + dragOffset.x;
+        const newY = mouseY + dragOffset.y;
+        const deltaX = newX - draggedCircle.centerBody.position.x;
+        const deltaY = newY - draggedCircle.centerBody.position.y;
+        
+        // Move center body
+        Matter.Body.translate(draggedCircle.centerBody, {
+            x: deltaX,
+            y: deltaY
+        });
+        
+        // Move all particles by the same displacement to maintain shape
+        for (let particle of draggedCircle.particles) {
+            Matter.Body.translate(particle, {
+                x: deltaX,
+                y: deltaY
+            });
+        }
+        return;
+    }
+
+    endPoint = createVector(mouseX, mouseY);
+}
+
+function mouseReleased() {
+    if (draggedColor) {
+        for (let circle of circles) {
+            const d = dist(mouseX, mouseY, 
+                         circle.centerBody.position.x, 
+                         circle.centerBody.position.y);
+            if (d < circle.radius) {
+                circle.addColor(draggedColor);
+            }
+        }
+        draggedColor = null;
+    } else if (draggedCircle) {
+        draggedCircle = null;
+    } else if (startPoint && endPoint) {
+        sliceLine = {
+            start: startPoint.copy(),
+            end: endPoint.copy()
+        };
+        checkAndDivideCircles();
+        startPoint = null;
+        endPoint = null;
+        sliceLine = null;
+    }
+}
+
+function getCircleIntersection(lineStart, lineEnd, circleCenter, radius) {
+    const lineDir = p5.Vector.sub(lineEnd, lineStart).normalize();
+    const centerToStart = p5.Vector.sub(circleCenter, lineStart);
+    const projection = centerToStart.dot(lineDir);
+    
+    const closestPoint = p5.Vector.add(
+        lineStart,
+        p5.Vector.mult(lineDir, constrain(projection, 0, p5.Vector.dist(lineStart, lineEnd)))
+    );
+    
+    return p5.Vector.dist(closestPoint, circleCenter) < radius ? closestPoint : null;
+}
+
+function calculateAreas(center, radius, lineStart, lineEnd) {
+    const lineDir = p5.Vector.sub(lineEnd, lineStart).normalize();
+    const centerToStart = p5.Vector.sub(center, lineStart);
+    const perpDist = abs(centerToStart.cross(lineDir).z);
+    
+    const theta = 2 * acos(perpDist / radius);
+    
+    const area1 = (sq(radius) * (theta - sin(theta))) / 2;
+    const area2 = PI * sq(radius) - area1;
+    
+    return { area1, area2 };
+}
+
+function checkAndDivideCircles() {
+    for (let i = circles.length - 1; i >= 0; i--) {
+        const circle = circles[i];
+        const center = createVector(circle.centerBody.position.x, circle.centerBody.position.y);
+        
+        const intersection = getCircleIntersection(sliceLine.start, sliceLine.end, center, circle.radius);
+        if (intersection) {
+            const areas = calculateAreas(center, circle.radius, sliceLine.start, sliceLine.end);
+            const totalArea = PI * sq(circle.radius);
+            const ratio1 = areas.area1 / totalArea;
+            const ratio2 = areas.area2 / totalArea;
+            
+            const radius1 = sqrt(ratio1) * circle.radius;
+            const radius2 = sqrt(ratio2) * circle.radius;
+            
+            circle.remove();
+            circles.splice(i, 1);
+            
+            const sliceAngle = atan2(sliceLine.end.y - sliceLine.start.y, 
+                                   sliceLine.end.x - sliceLine.start.x);
+            const perpAngle = sliceAngle + PI/2;
+            
+            const offset1 = radius1 * 0.8;
+            const offset2 = radius2 * 0.8;
+            
+            const newCircle1 = new LiquidCircle(
+                center.x + cos(perpAngle) * offset1,
+                center.y + sin(perpAngle) * offset1,
+                radius1,
+                circle.color
+            );
+            newCircle1.colors = [...circle.colors];
+            
+            const newCircle2 = new LiquidCircle(
+                center.x - cos(perpAngle) * offset2,
+                center.y - sin(perpAngle) * offset2,
+                radius2,
+                circle.color
+            );
+            newCircle2.colors = [...circle.colors];
+            
+            const separationSpeed = 2;
+            Matter.Body.setVelocity(newCircle1.centerBody, {
+                x: cos(perpAngle) * separationSpeed,
+                y: sin(perpAngle) * separationSpeed
+            });
+            
+            Matter.Body.setVelocity(newCircle2.centerBody, {
+                x: -cos(perpAngle) * separationSpeed,
+                y: -sin(perpAngle) * separationSpeed
+            });
+            
+            circles.push(newCircle1);
+            circles.push(newCircle2);
+        }
+    }
+}
+</script>
+</body>
+</html>

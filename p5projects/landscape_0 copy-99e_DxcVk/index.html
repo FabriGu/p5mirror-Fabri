@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Landscape</title>
+    <style>
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="glCanvas"></canvas>
+    <script>
+        let gl;
+        let program;
+        let positions = [];
+        let indices = [];
+        
+        // Vertex shader
+        const vsSource = `
+            attribute vec4 aPosition;
+            uniform mat4 uModelViewMatrix;
+            uniform mat4 uProjectionMatrix;
+            varying float vHeight;
+            
+            void main() {
+                vHeight = aPosition.y;
+                gl_Position = uProjectionMatrix * uModelViewMatrix * aPosition;
+            }
+        `;
+
+        // Fragment shader
+        const fsSource = `
+            precision mediump float;
+            varying float vHeight;
+            
+            void main() {
+                vec3 color = mix(vec3(0.1, 0.1, 0.8), vec3(0.8, 0.1, 0.1), vHeight * 0.5);
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `;
+
+        function initGL() {
+            const canvas = document.getElementById('glCanvas');
+            gl = canvas.getContext('webgl');
+
+            if (!gl) {
+                alert('WebGL not available');
+                return;
+            }
+
+            // Create terrain grid
+            const gridSize = 20;
+            const scale = 2.0 / gridSize;
+            
+            for(let z = 0; z < gridSize; z++) {
+                for(let x = 0; x < gridSize; x++) {
+                    const xPos = (x * scale) - 1.0;
+                    const zPos = (z * scale) - 1.0;
+                    const yPos = Math.sin(x * 0.5) * Math.cos(z * 0.5) * 0.3;
+                    
+                    positions.push(xPos, yPos, zPos);
+                }
+            }
+
+            // Create indices for triangles
+            for(let z = 0; z < gridSize-1; z++) {
+                for(let x = 0; x < gridSize-1; x++) {
+                    const topLeft = z * gridSize + x;
+                    const topRight = topLeft + 1;
+                    const bottomLeft = (z + 1) * gridSize + x;
+                    const bottomRight = bottomLeft + 1;
+
+                    indices.push(topLeft, bottomLeft, topRight);
+                    indices.push(topRight, bottomLeft, bottomRight);
+                }
+            }
+
+            // Initialize shaders
+            const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vertexShader, vsSource);
+            gl.compileShader(vertexShader);
+
+            const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fragmentShader, fsSource);
+            gl.compileShader(fragmentShader);
+
+            program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            // Create buffers
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+            const indexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+
+            const aPosition = gl.getAttribLocation(program, 'aPosition');
+            gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(aPosition);
+
+            gl.enable(gl.DEPTH_TEST);
+            
+            render();
+        }
+
+        function render() {
+            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            // Set up matrices
+            const projectionMatrix = mat4.perspective(mat4.create(), 
+                45 * Math.PI / 180,
+                gl.canvas.clientWidth / gl.canvas.clientHeight,
+                0.1,
+                100.0
+            );
+
+            const modelViewMatrix = mat4.create();
+            mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -4.0]);
+            mat4.rotate(modelViewMatrix, modelViewMatrix, Date.now() * 0.001, [0, 1, 0]);
+
+            const uProjectionMatrix = gl.getUniformLocation(program, 'uProjectionMatrix');
+            const uModelViewMatrix = gl.getUniformLocation(program, 'uModelViewMatrix');
+            
+            gl.uniformMatrix4fv(uProjectionMatrix, false, projectionMatrix);
+            gl.uniformMatrix4fv(uModelViewMatrix, false, modelViewMatrix);
+
+            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+            requestAnimationFrame(render);
+        }
+
+        // Initialize GL-Matrix library
+        function loadGLMatrix() {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js';
+            script.onload = initGL;
+            document.body.appendChild(script);
+        }
+
+        window.onload = loadGLMatrix;
+    </script>
+</body>
+</html>

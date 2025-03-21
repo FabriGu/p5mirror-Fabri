@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+/*         body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        } */
+    </style>
+</head>
+<body>
+    <script>
+        let centerPyramid;
+        let orbitingPyramids = [];
+        const PYRAMID_COUNT = 20;
+        const BASE_SIZE = 200;
+        const ORBIT_RADIUS = 2000;
+        const GRAVITATIONAL_CONSTANT = 40;
+        const SUBDIVISION_LEVEL = 1;
+
+        class Pyramid {
+            constructor(x, y, z, size, isCenter = false, subdivisionLevel = 0) {
+                const h = size * Math.sqrt(6) / 3;
+                const r = size / Math.sqrt(3);
+                
+                this.vertices = [
+                    createVector(0, -h, 0),
+                    createVector(-r, h/3, -size/2),
+                    createVector(-r, h/3, size/2),
+                    createVector(r, h/3, 0)
+                ];
+                
+                this.pos = createVector(x, y, z);
+                this.vel = isCenter ? createVector(0, 0, 0) : this.generateInitialVelocity();
+                this.rotation = createVector(random(TWO_PI), random(TWO_PI), random(TWO_PI));
+                this.angularVel = createVector(random(-0.02, 0.02), random(-0.02, 0.02), random(-0.02, 0.02));
+                
+                this.size = size;
+                this.color = isCenter 
+                    ? color(0, 0, 100)  // White for center 
+                    : color(random(360), 70, 70);
+                this.isCenter = isCenter;
+                
+                // Subdivision storage
+                this.subPyramids = [];
+                if (subdivisionLevel > 0) {
+                    this.subdivide(subdivisionLevel);
+                }
+            }
+
+            subdivide(level) {
+                if (level === 0) return;
+                
+                function midpoint(v1, v2) {
+                    return p5.Vector.add(v1, v2).mult(0.5);
+                }
+                
+                const vertices = this.vertices.map(v => createVector(v.x, v.y, v.z));
+                
+                // Calculate midpoints
+                const mid01 = midpoint(vertices[0], vertices[1]);
+                const mid02 = midpoint(vertices[0], vertices[2]);
+                const mid03 = midpoint(vertices[0], vertices[3]);
+                const mid12 = midpoint(vertices[1], vertices[2]);
+                const mid23 = midpoint(vertices[2], vertices[3]);
+                const mid31 = midpoint(vertices[3], vertices[1]);
+                
+                // Create four smaller pyramids' vertices
+                this.subPyramids = [
+                    [vertices[0], mid01, mid02, mid03],
+                    [mid01, vertices[1], mid12, mid31],
+                    [mid02, mid12, vertices[2], mid23],
+                    [mid03, mid31, mid23, vertices[3]]
+                ];
+                
+                // Recursively subdivide each set of vertices
+                if (level > 1) {
+                    let newSubPyramids = [];
+                    for (let subVertices of this.subPyramids) {
+                        let subVerts = [
+                            subVertices[0],
+                            subVertices[1],
+                            subVertices[2],
+                            subVertices[3]
+                        ];
+                        
+                        const smid01 = midpoint(subVerts[0], subVerts[1]);
+                        const smid02 = midpoint(subVerts[0], subVerts[2]);
+                        const smid03 = midpoint(subVerts[0], subVerts[3]);
+                        const smid12 = midpoint(subVerts[1], subVerts[2]);
+                        const smid23 = midpoint(subVerts[2], subVerts[3]);
+                        const smid31 = midpoint(subVerts[3], subVerts[1]);
+                        
+                        newSubPyramids.push(
+                            [subVerts[0], smid01, smid02, smid03],
+                            [smid01, subVerts[1], smid12, smid31],
+                            [smid02, smid12, subVerts[2], smid23],
+                            [smid03, smid31, smid23, subVerts[3]]
+                        );
+                    }
+                    this.subPyramids = newSubPyramids;
+                }
+            }
+
+            generateInitialVelocity() {
+                // Create a tangential velocity for orbital motion
+                let toCenter = p5.Vector.sub(createVector(0, 0, 0), this.pos);
+                let tangent = createVector(-toCenter.y, toCenter.x, 0).normalize();
+                
+                // Velocity magnitude based on distance from center
+                let distance = this.pos.mag();
+                let speed = sqrt(GRAVITATIONAL_CONSTANT * 500 / distance) /10;
+                
+                return tangent.mult(speed);
+            }
+
+            applyGravity(center) {
+                if (this.isCenter) return;
+
+                // Gravitational attraction
+                let toCenter = p5.Vector.sub(center.pos, this.pos);
+                let distance = toCenter.mag();
+                
+                // Gravitational force calculation
+                let strength = GRAVITATIONAL_CONSTANT * center.size / (distance * distance);
+                toCenter.normalize();
+                toCenter.mult(strength);
+                
+                // Update velocity
+                this.vel.add(toCenter);
+            }
+
+            update() {
+                // Update position
+                this.pos.add(this.vel);
+                
+                // Update rotation
+                this.rotation.add(this.angularVel);
+            }
+
+            show() {
+                push();
+                translate(this.pos.x, this.pos.y, this.pos.z);
+                rotateX(this.rotation.x);
+                rotateY(this.rotation.y);
+                rotateZ(this.rotation.z);
+                
+                // Apply specular material for shiny effect
+                specularMaterial(this.color);
+                shininess(50);
+                
+                // Draw subdivided pyramids or base pyramid
+                if (this.subPyramids.length > 0) {
+                    for (let subVertices of this.subPyramids) {
+                        beginShape(TRIANGLES);
+                        
+                        // Side triangles
+                        vertex(subVertices[1].x, subVertices[1].y, subVertices[1].z);
+                        vertex(subVertices[2].x, subVertices[2].y, subVertices[2].z);
+                        vertex(subVertices[3].x, subVertices[3].y, subVertices[3].z);
+                        
+                        vertex(subVertices[0].x, subVertices[0].y, subVertices[0].z);
+                        vertex(subVertices[1].x, subVertices[1].y, subVertices[1].z);
+                        vertex(subVertices[2].x, subVertices[2].y, subVertices[2].z);
+                        
+                        vertex(subVertices[0].x, subVertices[0].y, subVertices[0].z);
+                        vertex(subVertices[2].x, subVertices[2].y, subVertices[2].z);
+                        vertex(subVertices[3].x, subVertices[3].y, subVertices[3].z);
+                        
+                        vertex(subVertices[0].x, subVertices[0].y, subVertices[0].z);
+                        vertex(subVertices[3].x, subVertices[3].y, subVertices[3].z);
+                        vertex(subVertices[1].x, subVertices[1].y, subVertices[1].z);
+                        
+                        endShape();
+                    }
+                } else {
+                    // Fallback to basic pyramid if no subdivision
+                    beginShape(TRIANGLES);
+                    
+                    vertex(this.vertices[1].x, this.vertices[1].y, this.vertices[1].z);
+                    vertex(this.vertices[2].x, this.vertices[2].y, this.vertices[2].z);
+                    vertex(this.vertices[3].x, this.vertices[3].y, this.vertices[3].z);
+                    
+                    vertex(this.vertices[0].x, this.vertices[0].y, this.vertices[0].z);
+                    vertex(this.vertices[1].x, this.vertices[1].y, this.vertices[1].z);
+                    vertex(this.vertices[2].x, this.vertices[2].y, this.vertices[2].z);
+                    
+                    vertex(this.vertices[0].x, this.vertices[0].y, this.vertices[0].z);
+                    vertex(this.vertices[2].x, this.vertices[2].y, this.vertices[2].z);
+                    vertex(this.vertices[3].x, this.vertices[3].y, this.vertices[3].z);
+                    
+                    vertex(this.vertices[0].x, this.vertices[0].y, this.vertices[0].z);
+                    vertex(this.vertices[3].x, this.vertices[3].y, this.vertices[3].z);
+                    vertex(this.vertices[1].x, this.vertices[1].y, this.vertices[1].z);
+                    
+                    endShape();
+                }
+                pop();
+            }
+        }
+
+        function setup() {
+            createCanvas(1080, 1080, WEBGL);
+            colorMode(HSB, 360, 100, 100);
+          perspective(PI/3, width/height, 0.1, 10000)
+          noStroke()
+            
+            // Create central pyramid with subdivision
+            centerPyramid = new Pyramid(0, 0, 0, BASE_SIZE * 2, true, SUBDIVISION_LEVEL+1);
+            
+            // Create orbiting pyramids
+            for (let i = 0; i < PYRAMID_COUNT; i++) {
+                // Generate pyramids in a spherical distribution around the center
+                let theta = random(TWO_PI);
+                let phi = random(TWO_PI);
+                let x = ORBIT_RADIUS * sin(phi) * cos(theta);
+                let y = ORBIT_RADIUS * sin(phi) * sin(theta);
+                let z = ORBIT_RADIUS * cos(phi);
+                
+                orbitingPyramids.push(new Pyramid(x, y, z, BASE_SIZE, false, SUBDIVISION_LEVEL));
+            }
+        }
+
+        function draw() {
+            background(0);
+            
+            // Lighting
+            ambientLight(50);
+            pointLight(255, 255, 255, 500, 500, 500);
+            pointLight(255, 255, 255, 500, 500, 500);
+            // Orbit controls
+            orbitControl();
+            
+            // Update and draw central pyramid
+            centerPyramid.update();  // Added update to make central pyramid spin
+            centerPyramid.show();
+            
+            // Update and draw orbiting pyramids
+            for (let pyramid of orbitingPyramids) {
+                pyramid.applyGravity(centerPyramid);
+                pyramid.update();
+                pyramid.show();
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(1080, 1080);
+        }
+    </script>
+</body>
+</html>

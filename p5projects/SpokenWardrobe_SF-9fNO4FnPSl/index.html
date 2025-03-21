@@ -1,0 +1,352 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>PoseNet example using p5.js</title>
+  <link rel="stylesheet" href="https://use.typekit.net/qec7nee.css">
+  <style>
+    /* border */
+    :root {
+      --background: #005;
+      --primary: #88D5BF;
+      --secondary: #5D6BF8;
+      --third: #e27fcb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    #status {
+      font-family: "hwt-arabesque", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      margin-bottom: 100px;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .wrapper {
+      transform: rotate(90deg);
+      transform-origin:bottom left;
+      
+      position:absolute;
+      top: -100vw;
+      left: 0;
+      
+      height:100vw;
+      width:100vh;
+      
+      background-color:#000;
+      color:#fff;
+
+      overflow:auto;
+    }
+
+    canvas {
+      position: absolute;
+      height: 100% !important;
+      width: auto !important;
+      z-index: 10;
+    }
+
+    main {
+      width: 500px; /* Desired width of the container */
+      height: 95% !important; /* Desired height of the container */
+      overflow: hidden; /* Hide overflow (cropping) */
+      border: 0px solid black; /* Optional border for visibility */
+      padding: 5px;
+
+      position: relative; /* Needed for absolute positioning of the canvas */
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+      animation: morph 8s ease-in-out infinite;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      /* height: 400px; */
+      transition: all 3s ease-in-out;
+      /* width: 400px; */
+      z-index: 5;
+    }
+
+    #wardrobe {
+      /* match the position of main */
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      border: 0px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #wardrobeImg {
+      width: 85%;
+      height: auto;
+      position: absolute;
+      z-index:-1;
+    }
+
+    .container {
+      align-items: center;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+    }
+
+    .shape {
+      background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+      animation: morph 8s ease-in-out infinite;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      height: 400px;
+      transition: all 1s ease-in-out;
+      width: 400px;
+      z-index: 5;
+    }
+
+    @keyframes morph {
+      0% {
+          border-radius:  60% 40% 30% 70% / 60% 30% 70% 40%;
+          background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+      } 
+      
+      50% {
+          border-radius:  30% 60% 70% 40% / 50% 60% 30% 60%;
+          background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
+      }
+      
+      100% {
+        border-radius:  60% 40% 30% 70% / 60% 30% 70% 40%;
+        background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+      } 
+    }
+
+    /* screensaver */
+    #screenSaverCont {
+      width: 100%;
+      height: 100%;
+    }
+
+    .tile {
+      box-sizing: border-box;
+      border-radius: 10px;
+      width: 200px;
+      height: auto;
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .tileImg {
+      width: 100%;
+      height: auto;
+    }
+
+    @keyframes moveLeft{
+        0% {left:-15%}
+        100% {left: 110%}
+    }
+
+    .hide {
+      display: none;
+    }
+
+    #myGif {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      z-index: -2;
+
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+
+    #blackFilter {
+      background-color: rgba(0,0,0,0.8);
+
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+
+      width: 110vw;
+      min-width: 100vw;
+      height: 100vh;
+      min-height: 100%;
+    }
+
+    h1 {
+      font-family: "hwt-arabesque", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 32pt;
+      /* -webkit-text-stroke-width: 2px; */
+      /* -webkit-text-stroke-color: purple; */
+      color:white;
+    }
+
+    #title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 600px;
+      font-size: 32pt!important;
+      text-align: center;
+    }
+
+    #instructions {
+      position: absolute;
+      top: 150px;
+      left:30px;
+      width: 400px;
+      font-size: 25pt!important;
+      text-align: center;
+    }
+
+    #buttons {
+      position: absolute;
+      top: 50%;
+      left: 85%;
+      transform: translate(-50%,-50%);
+      z-index: 10;
+    }
+
+    #buttons button {
+      font-family: "hwt-arabesque", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 40pt!important;
+    }
+
+    span {
+      color: red;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.20.0-alpha.4/dist/ml5.min.js"></script>
+</head>
+
+<body >
+  <img src="./gif/tripygif.gif" id="myGif"></img>
+  <div id="blackFilter"></div>
+  <div id="title">
+    <h1>WELCOME TO SPOKEN WARDROBE</h1>
+  </div>
+  <div id="instructions">
+    <h1>You have <span>18</span> seconds to tell the mirror on the wall whatever outfit you can dream of. <br><br>Once the time is up your words will become reality! </h1>
+  </div>
+  <div id="buttons">
+    <button id ="restart" >RESTART</button>
+    
+  </div>
+  <div id="wardrobe">
+    <img id="wardrobeImg" src="./img/wardrobe.png" >
+  </div>
+  <script src="sketch.js"></script>
+  <div id="screenSaverCont">
+  </div>
+
+  <script>
+    let screenSaverCont = document.querySelector("#screenSaverCont")
+    let main = document.querySelector("main")
+    let wardrobe = document.querySelector("#wardrobe")
+    let wardrobeImg = document.querySelector("#wardrobeImg")
+    let instructions = document.querySelector("#instructions")
+    let buttons = document.querySelector("#buttons")
+    let restart = document.querySelector("#restart")
+    let title = document.querySelector("#title")
+    screenSaverCont.classList.add('hide')
+    function showAllPics() {
+      console.log('showAllPics')
+      // hide wardrobe, and all text
+      wardrobe.classList.add('hide')
+      wardrobeImg.classList.add('hide')
+      instructions.classList.add('hide')
+    
+      // Retrieve the data URL from local storage
+      let imagesArray = getImagesArray();
+      let counter = localStorage.getItem('counter');
+
+      // Check if data URL is retrieved successfully
+      if (imagesArray) {
+        console.log(images)
+        console.log(counter)
+        screenSaverCont.classList.remove('hide')
+        // Create an <img> element
+        for (let i = 0; i < imagesArray.length; i++) {
+          let imgElement = document.createElement('img');
+          imgElement.src = localStorage.getItem(imagesArray[i])
+          imgElement.classList.add("tileImg");
+
+          let ranMorphTime = Math.random() * (20 - 5) + 5;
+
+          imgElement.style.animation = "morph" + " " + ranMorphTime + "s ease-in-out infinite";
+
+          // animation: morph 8s ease-in-out infinite;
+          // Get the div where you want to display the image
+          let imageDiv = document.createElement('div');
+          imageDiv.classList.add("tile");
+          // Append the <img> element to the div
+          var ranTop = Math.random() * ((document.body.scrollHeight + 300)- 100) + 100;
+          var ranMove = Math.floor(Math.random() * (80 - 25) + 25);
+
+          let ranWidth = Math.random() * (450 - 200) + 200;
+          // make sure that image is not loaded off the  bottom of the screen
+          if (ranTop > (document.body.scrollHeight - 200)) {
+            ranTop = document.body.scrollHeight - 500;
+          }
+          
+          imageDiv.style.top = ranTop + "px";
+          imageDiv.style.width = ranWidth + "px";
+
+          imageDiv.style.animation = "moveLeft" + " " + ranMove + "s linear infinite";
+
+          imageDiv.appendChild(imgElement);
+          screenSaverCont.appendChild(imageDiv);
+        }
+       
+      }
+      document.querySelector("main").classList.add('hide')
+    }
+    restart.onclick = function (e) {
+      console.log('restart')
+      // show wardrobe, and all text
+      wardrobe.classList.remove('hide')
+      wardrobeImg.classList.remove('hide')
+      instructions.classList.remove('hide')
+      screenSaverCont.classList.add('hide')
+      document.querySelector("main").classList.remove('hide')
+      // clear screen saver
+      displayGoing = true;
+      draw3d = true;
+      time = 0;
+      imgLoaded = false;
+      displayedText = "";
+      wordsA = ["clothes", "clothing", "wearing", "garments", "attire", "garment", "outfit"];
+      images = [];
+      videoOn = true;
+      successfull = false;
+      countAsks = 0;
+      beginRecord();
+    }
+  </script>
+  
+</body>
+
+</html>

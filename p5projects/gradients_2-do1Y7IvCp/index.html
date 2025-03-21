@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: white;
+    }
+    
+    #container {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(16,1fr);
+/*       gap: 2px; */
+      padding: 0px;
+    }
+    
+    .cell {
+      width: 100%;
+      height: 100%;
+      border: 0px;
+      border-radius: 0px;
+      transition: background 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <script>
+    const gridSize = 16;
+    const container = document.getElementById('container');
+    let time = 0;
+    
+    // Create grid cells
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      container.appendChild(cell);
+    }
+    
+    function updateGradients() {
+      const cells = document.getElementsByClassName('cell');
+      
+      
+      for (let i = 0; i < cells.length; i++) {
+        let x, y;
+        y = Math.floor(i / gridSize);
+
+        // Divide the grid into vertical sections
+        if (i < (cells.length/4)) {
+            // First quarter - normal movement
+            x = i % gridSize;
+        } else if (i >= (cells.length/4*2) && i < (cells.length/4*3)) {
+            // Third quarter - normal movement
+            x = -i % gridSize;
+        } else {
+            // Second and fourth quarters - reversed movement
+            x = gridSize - (i % gridSize); // Use this instead of -i % gridSize
+        }
+        
+        // const x = ;
+        // const y = 0
+        
+        // Create wave-like movements
+        const offsetX = Math.sin((time + x * 25) * Math.PI / 800) * 5;
+        const offsetY = Math.cos((time + y * 25) * Math.PI / 800) * 5;
+        
+        // Create dynamic hue values
+        const baseHue1 = (time ) % 360;
+        const baseHue2 = (baseHue1 + 80) % 360;
+        
+        // Add wave pattern influence to gradient angle
+        const angle = (time + x * 10 + y * 5+ 
+                      Math.sin((time + x * 20 + y * 20) * Math.PI / 160) ) % 360;
+        
+        // Apply gradient
+        cells[i].style.background = `linear-gradient(
+          ${angle}deg,
+          hsl(${baseHue1}, 70%, ${50 + offsetX * 10}%) 0%,
+          hsl(${baseHue2}, 70%, ${50 + offsetY * 10}%) 100%
+        )`;
+      }
+      
+      // Update time and request next frame
+      time += 1.1;
+      requestAnimationFrame(updateGradients);
+    }
+    
+    
+    // Start animation
+    requestAnimationFrame(updateGradients);
+  </script>
+</body>
+</html>

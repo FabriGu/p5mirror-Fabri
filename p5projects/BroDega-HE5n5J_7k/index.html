@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NYC Bodega Virtual Environment</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body { margin: 0; padding: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script>
+let cameraX = 0;
+let cameraY = -30;
+let cameraZ = 250;
+let lookX = 0;
+let lookZ = -1;
+let rotationY = 0;
+const moveSpeed = 5;
+
+// Textures
+let floorPattern;
+let wallPattern;
+let shelfPattern;
+let counterPattern;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  perspective(PI/3.0, width/height, 0.1, 500);
+  
+  // Create procedural textures
+  floorPattern = createFloorTexture();
+  wallPattern = createWallTexture();
+  shelfPattern = createShelfTexture();
+  counterPattern = createCounterTexture();
+}
+
+function createFloorTexture() {
+  let g = createGraphics(100, 100);
+  g.background(180);
+  for(let i = 0; i < 100; i += 20) {
+    for(let j = 0; j < 100; j += 20) {
+      g.noStroke();
+      g.fill(160 + random(-20, 20));
+      g.rect(i, j, 20, 20);
+    }
+  }
+  return g;
+}
+
+function createWallTexture() {
+  let g = createGraphics(100, 100);
+  g.background(220);
+  for(let i = 0; i < 100; i += 10) {
+    g.stroke(200);
+    g.line(i, 0, i, 100);
+  }
+  return g;
+}
+
+function createShelfTexture() {
+  let g = createGraphics(100, 100);
+  g.background(139, 69, 19);
+  for(let i = 0; i < 100; i += 5) {
+    g.stroke(120, 60, 15);
+    g.line(0, i, 100, i);
+  }
+  return g;
+}
+
+function createCounterTexture() {
+  let g = createGraphics(100, 100);
+  g.background(150);
+  for(let i = 0; i < 100; i += 10) {
+    for(let j = 0; j < 100; j += 10) {
+      g.stroke(140);
+      g.noFill();
+      g.rect(i, j, 10, 10);
+    }
+  }
+  return g;
+}
+
+function draw() {
+  background(50);
+  
+  // Camera position and orientation
+  camera(cameraX, cameraY, cameraZ, 
+         cameraX + lookX, cameraY, cameraZ + lookZ, 
+         0, 1, 0);
+  
+  // Lighting
+  pointLight(255, 255, 255, 0, -100, 0);
+  pointLight(255, 255, 200, -100, -50, -150); // Deli counter light
+  ambientLight(100);
+  
+  // Floor
+  push();
+  translate(0, 50, 0);
+  rotateX(HALF_PI);
+  texture(floorPattern);
+  plane(300, 400);
+  pop();
+  
+  // Walls
+  push();
+  texture(wallPattern);
+  // Left wall
+  push();
+  translate(-150, 0, 0);
+  rotateY(HALF_PI);
+  plane(400, 200);
+  pop();
+  
+  // Right wall
+  push();
+  translate(150, 0, 0);
+  rotateY(HALF_PI);
+  plane(400, 200);
+  pop();
+  
+  // Back wall
+  push();
+  translate(0, 0, -200);
+  plane(300, 200);
+  pop();
+  pop();
+  
+  // Two parallel aisles
+  for(let x = -50; x <= 50; x += 100) {
+    for(let z = -150; z < 0; z += 30) {
+      drawShelf(x, z);
+    }
+  }
+  
+  // Counter with deli grill
+  push();
+  translate(-100, 20, -170);
+  texture(counterPattern);
+  box(80, 60, 40);
+  
+  // Grill top
+  push();
+  translate(0, -30, 0);
+  fill(80);
+  box(70, 2, 35);
+  // Grill details
+  for(let x = -30; x < 30; x += 10) {
+    for(let z = -15; z < 15; z += 10) {
+      push();
+      translate(x, 0, z);
+      fill(60);
+      box(8, 1, 8);
+      pop();
+    }
+  }
+  pop();
+  pop();
+}
+
+function drawShelf(x, z) {
+  push();
+  translate(x, 0, z);
+  
+  // Shelf structure
+  texture(shelfPattern);
+  box(50, 100, 20);
+  
+  // Stack stick figures on shelves
+  for(let y = -30; y <= 30; y += 15) {
+    for(let zOffset = -8; zOffset <= 8; zOffset += 8) {
+      drawStickFigure(0, y, zOffset);
+    }
+  }
+  pop();
+}
+
+function drawStickFigure(x, y, z) {
+  push();
+  translate(x, y, z);
+  scale(2);
+  
+  // Head
+  fill(255, 220, 180);
+  sphere(1);
+  
+  // Body
+  stroke(random(150, 255), random(150, 255), random(150, 255));
+  strokeWeight(0.5);
+  line(0, 1, 0, 0, 4, 0);
+  
+  // Arms
+  line(-2, 2, 0, 2, 2, 0);
+  
+  // Legs
+  line(0, 4, 0, -1, 6, 0);
+  line(0, 4, 0, 1, 6, 0);
+  pop();
+}
+
+function keyPressed() {
+  const lookSpeed = 0.1;
+  
+  if (keyCode === 65) { // A key - strafe left
+    cameraX -= moveSpeed * cos(rotationY);
+    cameraZ -= moveSpeed * sin(rotationY);
+  }
+  if (keyCode === 68) { // D key - strafe right
+    cameraX += moveSpeed * cos(rotationY);
+    cameraZ += moveSpeed * sin(rotationY);
+  }
+  if (keyCode === 87) { // W key - move forward
+    cameraX += moveSpeed * sin(rotationY);
+    cameraZ -= moveSpeed * cos(rotationY);
+  }
+  if (keyCode === 83) { // S key - move backward
+    cameraX -= moveSpeed * sin(rotationY);
+    cameraZ += moveSpeed * cos(rotationY);
+  }
+  if (keyCode === LEFT_ARROW) {
+    rotationY -= lookSpeed;
+    lookX = sin(rotationY);
+    lookZ = -cos(rotationY);
+  }
+  if (keyCode === RIGHT_ARROW) {
+    rotationY += lookSpeed;
+    lookX = sin(rotationY);
+    lookZ = -cos(rotationY);
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+</script>
+</body>
+</html>

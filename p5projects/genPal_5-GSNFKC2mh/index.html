@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Palette Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+        
+        #sketch-container {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            background: white;
+        }
+        
+        .generated-palette-container {
+            position: absolute;
+            top: calc(50% + 180px); /* Adjust to bottom-right quadrant */
+            left: calc(50% + 240px);
+            width: 480px;
+            height: 360px;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease-in-out;
+            z-index: 10;
+        }
+        
+        .generated-palette-container.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .generated-palette-container.expanded {
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .color-boxes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            z-index: 20;
+        }
+        
+        .color-boxes.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        
+        .color-row {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .color-box {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .color-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .color-info {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .color-box:hover .color-info {
+            opacity: 1;
+        }
+
+        #loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            z-index: 30;
+        }
+
+        #loading-indicator.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #palette-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="sketch-container">
+        <div class="generated-palette-container">
+            <img id="palette-image">
+            <div class="color-boxes">
+                <div class="color-row"></div>
+                <div class="color-row"></div>
+            </div>
+        </div>
+        <div id="loading-indicator"></div>
+    </div>
+
+    <script>
+        // Original p5.js code modified to work with new HTML structure
+        const replicateProxy = "https://replicate-api-proxy.glitch.me";
+        let feedback;
+        let webcam;
+        let captureButton;
+        let currentPalette = [];
+        let isProcessing = false;
+        let capturedImage;
+        let generatedPaletteImage;
+        let sceneDescription = "";
+        
+        function setup() {
+            const canvas = createCanvas(1080, 1080);
+            canvas.parent('sketch-container');
+            
+            webcam = createCapture(VIDEO);
+            webcam.size(480, 360);
+            webcam.hide();
+            
+            captureButton = createButton('Generate Palette from Scene');
+            captureButton.position(10, height - 40);
+            captureButton.mousePressed(captureAndProcess);
+            
+            feedback = createP("");
+            feedback.position(10, height - 60);
+            
+            currentPalette = Array(5).fill(color(0, 0, 100));
+        }
+        
+        function draw() {
+            background(255);
+            
+            // Draw grid lines
+            stroke(50);
+            strokeWeight(2);
+            line(width/2, 0, width/2, height);
+            line(0, height/2, width, height/2);
+            
+            // Step 1: Webcam Feed (Top Left)
+            noStroke();
+            fill(0);
+            textSize(24);
+            text("1. Camera Input", 20, 40);
+            image(webcam, 20, 60, 480, 360);
+            
+            // Step 2: Captured Image (Top Right)
+            text("2. Captured Frame", width/2 + 20, 40);
+            if (capturedImage) {
+                image(capturedImage, width/2 + 20, 60, 480, 360);
+            } else {
+                fill(150);
+                rect(width/2 + 20, 60, 480, 360);
+                fill(0);
+                textSize(16);
+                textAlign(CENTER, CENTER);
+                text("Click button to capture", width/2 + 260, 240);
+                textAlign(LEFT, BASELINE);
+            }
+            
+            // Step 3: Description (Bottom Left)
+            textSize(24);
+            text("3. AI Scene Description", 20, height/2 + 40);
+            fill(150);
+            rect(20, height/2 + 60, 480, 360);
+            fill(0);
+            textSize(16);
+            textWrap(WORD);
+           textAlign(CENTER, CENTER);
+            text(sceneDescription || "Description will appear here...", 30, height/2 + 240, 460);
+          
+          // Step 4: Generated Palette Image (Bottom Right)
+          textAlign(LEFT, BASELINE);
+  textSize(24);
+  text("4. AI Generated Palette", width/2 + 20, height/2 + 40);
+  
+    fill(150);
+    rect(width/2 + 20, height/2 + 60, 480, 360);
+    fill(0);
+    textSize(16);
+    textAlign(CENTER, CENTER);
+    text("Palette image will appear here", width/2 + 260, height/2 + 240);
+    textAlign(LEFT, BASELINE);
+  
+            
+            // Loading indicator
+            if (isProcessing) {
+                push();
+                translate(width/2, height/2);
+                rotate(frameCount * 0.1);
+                noFill();
+                stroke(0);
+                strokeWeight(4);
+                arc(0, 0, 80, 80, 0, PI + PI/2);
+                pop();
+            }
+        }
+
+        async function handlePaletteGenerated(incomingImage) {
+            generatedPaletteImage = incomingImage;
+            currentPalette = extractPaletteFromImage(incomingImage);
+            
+            // Set the image source
+            const paletteContainer = document.querySelector('.generated-palette-container');
+            const paletteImage = document.getElementById('palette-image');
+            paletteImage.src = incomingImage.canvas.toDataURL();
+            
+            // Show the container
+            paletteContainer.classList.add('visible');
+            
+            // Wait a moment, then expand
+            setTimeout(() => {
+                paletteContainer.classList.add('expanded');
+                
+                // After expansion, create and show color boxes
+                setTimeout(() => {
+                    createColorBoxes(currentPalette);
+                    document.querySelector('.color-boxes').classList.add('visible');
+                }, 800);
+            }, 500);
+
+            feedback.html("Palette generated!");
+        }
+
+        function createColorBoxes(palette) {
+            const rows = document.querySelectorAll('.color-row');
+            rows[0].innerHTML = ''; // Top row (3 boxes)
+            rows[1].innerHTML = ''; // Bottom row (2 boxes)
+            
+            // Create top row (3 boxes)
+            for (let i = 0; i < 3; i++) {
+                const box = createColorBox(palette[i]);
+                rows[0].appendChild(box);
+            }
+            
+            // Create bottom row (2 boxes)
+            for (let i = 3; i < 5; i++) {
+                const box = createColorBox(palette[i]);
+                rows[1].appendChild(box);
+            }
+        }
+
+        function createColorBox(col) {
+            const box = document.createElement('div');
+            box.className = 'color-box';
+            const r = red(col);
+            const g = green(col);
+            const b = blue(col);
+            box.style.backgroundColor = `rgb(${r},${g},${b})`;
+            
+            const info = document.createElement('div');
+            info.className = 'color-info';
+            info.textContent = `RGB: ${floor(r)}, ${floor(g)}, ${floor(b)}`;
+            box.appendChild(info);
+            
+            return box;
+        }
+
+        async function generatePaletteImage(description) {
+            feedback.html("Generating palette from description: " + description);
+            
+            let data = {
+                version: "39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b",
+                input: {
+                    prompt: `Abstract color palette based on: ${description}. Minimal, clean blocks of color representing the essence of the scene.`,
+                    negative_prompt: "text, words, letters, busy, detailed",
+                    num_inference_steps: 50,
+                    guidance_scale: 7.5,
+                    seed: Math.floor(Math.random() * 1000000),
+                },
+            };
+            
+            let options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            };
+            
+            const url = replicateProxy + "/create_n_get/";
+            const picture_info = await fetch(url, options);
+            const proxy_said = await picture_info.json();
+            
+            if (proxy_said.output.length == 0) {
+                throw new Error("Failed to generate palette image");
+            }
+            
+            loadImage(proxy_said.output[0], handlePaletteGenerated);
+        }
+      
+      
+function saveCanvasToBase64() {
+  return new Promise((resolve) => {
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = webcam.width;
+    tempCanvas.height = webcam.height;
+    const ctx = tempCanvas.getContext('2d');
+    ctx.drawImage(webcam.elt, 0, 0, webcam.width, webcam.height);
+    const base64Data = tempCanvas.toDataURL('image/jpeg');
+    capturedImage = loadImage(base64Data);
+    resolve(base64Data);
+  });
+}
+
+async function getSceneDescription(base64Image) {
+  let data = {
+    version: "80537f9eead1a5bfa72d5ac6ea6414379be41d4d4f6679fd776e9535d1eb58bb",
+    input: {
+      image: base64Image,
+      top_p: 1,
+      prompt: "Describe the main colors and mood of this scene.",
+      max_tokens: 1024,
+      temperature: 0.2
+    }
+  };
+  
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+  
+  const url = replicateProxy + "/create_n_get/";
+  const response = await fetch(url, options);
+  const result = await response.json();
+  
+  if (!result.output) {
+    throw new Error("No description generated");
+  }
+  
+  return result.output;
+}
+      
+      
+function isGrayOrWhite(color) {
+  const [r, g, b] = color;
+  const maxDiff = Math.max(Math.abs(r - g), Math.abs(r - b), Math.abs(g - b));
+  const brightness = (r + g + b) / 3;
+  
+  // Return true if the color is too gray, too dark, or too bright
+  return maxDiff < 20 || brightness < 20 || brightness > 235;
+}
+
+function calculateColorDistance(color1, color2) {
+  const dr = color1[0] - color2[0];
+  const dg = color1[1] - color2[1];
+  const db = color1[2] - color2[2];
+  
+  return Math.sqrt(dr * dr + dg * dg + db * db);
+}
+
+function extractPaletteFromImage(img) {
+  img.loadPixels();
+  
+  let colors = [];
+  const skipPixels = 2; // Sample every nth pixel for performance
+  const colorSimilarityThreshold = 45; // Increased threshold for more variety
+  
+  // Sample pixels and count color occurrences
+  for (let y = 0; y < img.height; y += skipPixels) {
+    for (let x = 0; x < img.width; x += skipPixels) {
+      const index = 4 * (y * img.width + x);
+      const r = img.pixels[index];
+      const g = img.pixels[index + 1];
+      const b = img.pixels[index + 2];
+      
+      // Skip transparent or gray/white pixels
+      if (img.pixels[index + 3] === 0 || isGrayOrWhite([r, g, b])) {
+        continue;
+      }
+      
+      // Find if a similar color exists
+      let foundSimilar = false;
+      for (let i = 0; i < colors.length; i++) {
+        if (calculateColorDistance([r, g, b], colors[i].color) < colorSimilarityThreshold) {
+          colors[i].amount += 1;
+          foundSimilar = true;
+          break;
+        }
+      }
+      
+      if (!foundSimilar) {
+        colors.push({
+          color: [r, g, b],
+          amount: 1
+        });
+      }
+    }
+  }
+  
+  // Sort colors by frequency
+  colors.sort((a, b) => b.amount - a.amount);
+  
+  const finalColors = [];
+  const minColorDistance = 60; // Increased for more variety
+  
+  // Select diverse colors from the most frequent ones
+  for (let i = 0; i < colors.length && finalColors.length < 5; i++) {
+    const candidateColor = colors[i].color;
+    
+    // Check if this color is different enough from already selected colors
+    const isDifferentEnough = !finalColors.some(existingColor => 
+      calculateColorDistance(candidateColor, existingColor) < minColorDistance
+    );
+    
+    if (isDifferentEnough) {
+      finalColors.push(candidateColor);
+    }
+  }
+  
+  // Fill remaining slots if needed
+  while (finalColors.length < 5 && colors.length > finalColors.length) {
+    finalColors.push(colors[finalColors.length].color);
+  }
+  
+  // Convert to p5 colors
+  return finalColors.map(([r, g, b]) => color(r, g, b));
+}
+      
+      
+async function captureAndProcess() {
+  if (isProcessing) return;
+  isProcessing = true;
+  feedback.html("Processing scene...");
+  
+  try {
+    // Save the current frame as a base64 image
+    const imageData = await saveCanvasToBase64();
+    feedback.html("Image captured, getting description...");
+    
+    // Get scene description from LLaVA
+    sceneDescription = await getSceneDescription(imageData);
+    feedback.html("Got scene description: " + sceneDescription);
+    
+    // Generate palette image based on description
+    await generatePaletteImage(sceneDescription);
+    
+  } catch (error) {
+    console.error('Error in processing:', error);
+    feedback.html("Error occurred: " + error.message);
+  }
+  
+  isProcessing = false;
+}
+
+        // [Rest of your functions remain the same: , , captureAndProcess, isGrayOrWhite, calculateColorDistance, extractPaletteFromImage]
+        
+    </script>
+</body>
+</html>

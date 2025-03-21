@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+let engine;
+let world;
+let circles = [];
+let startPoint = null;
+let endPoint = null;
+let sliceLine = null;
+let originalRadius = 150;
+
+class LiquidCircle {
+    constructor(x, y, radius) {
+        this.radius = radius;
+        this.particles = [];
+        this.springs = [];
+        this.centerBody = null;
+        this.createParticles(x, y);
+    }
+
+    createParticles(x, y) {
+        const particleCount = 20;
+        const angleStep = (2 * PI) / particleCount;
+        
+        // Create center body
+        this.centerBody = Matter.Bodies.circle(x, y, 5, {
+            isStatic: false,
+            friction: 0.1,
+            restitution: 0.5
+        });
+        Matter.World.add(world, this.centerBody);
+
+        // Create particles around the circle
+        for (let i = 0; i < particleCount; i++) {
+            const angle = i * angleStep;
+            const px = x + cos(angle) * this.radius;
+            const py = y + sin(angle) * this.radius;
+            
+            const particle = Matter.Bodies.circle(px, py, 10, {
+                friction: 0.1,
+                restitution: 0.5
+            });
+            
+            this.particles.push(particle);
+            Matter.World.add(world, particle);
+
+            // Create spring between particle and center
+            const spring = Matter.Constraint.create({
+                bodyA: this.centerBody,
+                bodyB: particle,
+                stiffness: 0.1,  // Increased from 0.01 for better shape retention
+                damping: 0.2
+            });
+            
+            this.springs.push(spring);
+            Matter.World.add(world, spring);
+
+            // Create springs between adjacent particles
+            if (i > 0) {
+                const prevParticle = this.particles[i - 1];
+                const spring = Matter.Constraint.create({
+                    bodyA: prevParticle,
+                    bodyB: particle,
+                    stiffness: 0.1,  // Increased from 0.01
+                    damping: 0.2
+                });
+                this.springs.push(spring);
+                Matter.World.add(world, spring);
+            }
+        }
+
+        // Connect first and last particles
+        const spring = Matter.Constraint.create({
+            bodyA: this.particles[0],
+            bodyB: this.particles[this.particles.length - 1],
+            stiffness: 0.01,
+            damping: 0.1
+        });
+        this.springs.push(spring);
+        Matter.World.add(world, spring);
+    }
+
+    display() {
+        // Only draw the filled shape without springs or particles
+        let points = this.particles.map(p => ({x: p.position.x, y: p.position.y}));
+        
+        // Draw the water body
+        fill(100, 100, 255, 200);
+        noStroke();
+        beginShape();
+        for (let i = 0; i < points.length; i++) {
+            let p1 = points[i];
+            curveVertex(p1.x, p1.y);
+        }
+        endShape(CLOSE);
+    }
+
+    remove() {
+        for (let particle of this.particles) {
+            Matter.World.remove(world, particle);
+        }
+        for (let spring of this.springs) {
+            Matter.World.remove(world, spring);
+        }
+        Matter.World.remove(world, this.centerBody);
+    }
+}
+
+function setup() {
+    createCanvas(800, 600);
+    engine = Matter.Engine.create();
+    world = engine.world;
+    world.gravity.y = 0;
+    circles.push(new LiquidCircle(width/2, height/2, originalRadius));
+}
+
+function draw() {
+    background(51);
+    Matter.Engine.update(engine);
+    
+    // Apply gentle repulsion between circles
+    for (let i = 0; i < circles.length; i++) {
+        for (let j = i + 1; j < circles.length; j++) {
+            const circle1 = circles[i];
+            const circle2 = circles[j];
+            
+            const dx = circle2.centerBody.position.x - circle1.centerBody.position.x;
+            const dy = circle2.centerBody.position.y - circle1.centerBody.position.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Reduced minimum distance and force
+            const minDistance = (circle1.radius + circle2.radius) * 1.05;
+            
+            if (distance < minDistance) {
+                // Much gentler repulsion force
+                const force = 0.002 * (minDistance - distance);
+                const angle = Math.atan2(dy, dx);
+                
+                Matter.Body.applyForce(circle1.centerBody, 
+                    circle1.centerBody.position,
+                    {
+                        x: -Math.cos(angle) * force,
+                        y: -Math.sin(angle) * force
+                    }
+                );
+                
+                Matter.Body.applyForce(circle2.centerBody,
+                    circle2.centerBody.position,
+                    {
+                        x: Math.cos(angle) * force,
+                        y: Math.sin(angle) * force
+                    }
+                );
+            }
+        }
+    }
+    
+    // Display all circles
+    for (let circle of circles) {
+        circle.display();
+    }
+    
+    // Draw slice line while dragging
+    if (startPoint && endPoint) {
+        stroke(255);
+        strokeWeight(2);
+        line(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+    }
+}
+
+function mousePressed() {
+    startPoint = createVector(mouseX, mouseY);
+}
+
+function mouseDragged() {
+    endPoint = createVector(mouseX, mouseY);
+}
+
+function mouseReleased() {
+    if (startPoint && endPoint) {
+        sliceLine = {
+            start: startPoint.copy(),
+            end: endPoint.copy()
+        };
+        checkAndDivideCircles();
+        startPoint = null;
+        endPoint = null;
+        sliceLine = null;
+    }
+}
+
+function getCircleIntersection(lineStart, lineEnd, circleCenter, radius) {
+    const lineDir = p5.Vector.sub(lineEnd, lineStart).normalize();
+    const centerToStart = p5.Vector.sub(circleCenter, lineStart);
+    const projection = centerToStart.dot(lineDir);
+    
+    const closestPoint = p5.Vector.add(
+        lineStart,
+        p5.Vector.mult(lineDir, constrain(projection, 0, p5.Vector.dist(lineStart, lineEnd)))
+    );
+    
+    return p5.Vector.dist(closestPoint, circleCenter) < radius ? closestPoint : null;
+}
+
+function calculateAreas(center, radius, lineStart, lineEnd) {
+    // Calculate perpendicular distance from center to line
+    const lineDir = p5.Vector.sub(lineEnd, lineStart).normalize();
+    const centerToStart = p5.Vector.sub(center, lineStart);
+    const perpDist = abs(centerToStart.cross(lineDir).z);
+    
+    // Calculate angle of circular segments
+    const theta = 2 * acos(perpDist / radius);
+    
+    // Calculate areas of segments
+    const area1 = (sq(radius) * (theta - sin(theta))) / 2;
+    const area2 = PI * sq(radius) - area1;
+    
+    return { area1, area2 };
+}
+
+function checkAndDivideCircles() {
+    for (let i = circles.length - 1; i >= 0; i--) {
+        const circle = circles[i];
+        const center = createVector(circle.centerBody.position.x, circle.centerBody.position.y);
+        
+        const intersection = getCircleIntersection(sliceLine.start, sliceLine.end, center, circle.radius);
+        if (intersection) {
+            // Calculate areas on each side of the slice
+            const areas = calculateAreas(center, circle.radius, sliceLine.start, sliceLine.end);
+            const totalArea = PI * sq(circle.radius);
+            const ratio1 = areas.area1 / totalArea;
+            const ratio2 = areas.area2 / totalArea;
+            
+            // Calculate new radii based on area ratios
+            const radius1 = sqrt(ratio1) * circle.radius;
+            const radius2 = sqrt(ratio2) * circle.radius;
+            
+            // Remove original circle
+            circle.remove();
+            circles.splice(i, 1);
+            
+            // Calculate centers for new circles based on area distribution
+            const sliceAngle = atan2(sliceLine.end.y - sliceLine.start.y, 
+                                   sliceLine.end.x - sliceLine.start.x);
+            const perpAngle = sliceAngle + PI/2;
+            
+            // Offset proportional to the radius of each new circle
+            const offset = (radius1 + radius2) * 0.2;  // Reduced offset for gentler separation
+            
+            circles.push(new LiquidCircle(
+                center.x + cos(perpAngle) * offset,
+                center.y + sin(perpAngle) * offset,
+                radius1
+            ));
+            
+            circles.push(new LiquidCircle(
+                center.x - cos(perpAngle) * offset,
+                center.y - sin(perpAngle) * offset,
+                radius2
+            ));
+        }
+    }
+}
+</script>
+</body>
+</html>
