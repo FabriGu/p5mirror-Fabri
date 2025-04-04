@@ -1,6 +1,28 @@
 # Sketches for FabriGu
-427 sketches  
-[Unexpected cut](https://editor.p5js.org/FabriGu/sketches/KXXLxkNmd)<!-- 2025-03-21T14:34:39.053Z -->  
+449 sketches  
+[ims-02 recursiveCircle Fullscreen](https://editor.p5js.org/FabriGu/sketches/MJOQaofdp)<!-- 2025-04-04T15:14:52.268Z -->  
+[ChatBot Conversation With Hisotry](https://editor.p5js.org/FabriGu/sketches/3j7OJn3nx)<!-- 2025-04-04T14:02:43.791Z -->  
+[simpleRecrusiveCircle+ML5 copy](https://editor.p5js.org/FabriGu/sketches/0X_vOT4Mg)<!-- 2025-04-04T11:59:11.982Z -->  
+[simpleRecrusiveCircle+ML5](https://editor.p5js.org/FabriGu/sketches/z_g178Pjx)<!-- 2025-04-04T04:18:30.824Z -->  
+[simpleRecrusiveCircleAddDelete](https://editor.p5js.org/FabriGu/sketches/EEuaOs1Jf)<!-- 2025-04-04T02:25:37.320Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiV2 workingcopy](https://editor.p5js.org/FabriGu/sketches/er_HX1NFI)<!-- 2025-04-04T02:17:02.035Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiV2](https://editor.p5js.org/FabriGu/sketches/hZdbQrapQ)<!-- 2025-04-04T02:10:24.574Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiV1](https://editor.p5js.org/FabriGu/sketches/ju4YFbws9)<!-- 2025-03-31T02:31:24.410Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiWRONG](https://editor.p5js.org/FabriGu/sketches/mF1y71xE4)<!-- 2025-03-31T02:19:28.404Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded](https://editor.p5js.org/FabriGu/sketches/0xC2qhKdb)<!-- 2025-03-31T02:07:25.473Z -->  
+[bodyPose\_Glitch\_v1](https://editor.p5js.org/FabriGu/sketches/3wbf11SxO)<!-- 2025-03-31T00:39:32.377Z -->  
+[pixelFreezeV2](https://editor.p5js.org/FabriGu/sketches/K8oAghdvp)<!-- 2025-03-30T23:38:36.245Z -->  
+[pixelFreezeV1](https://editor.p5js.org/FabriGu/sketches/w1-Sxh9y-)<!-- 2025-03-30T23:38:24.249Z -->  
+[L-systems](https://editor.p5js.org/FabriGu/sketches/UPbCbBIc2)<!-- 2025-03-30T19:49:54.135Z -->  
+[attractors](https://editor.p5js.org/FabriGu/sketches/-jjvKqdi4)<!-- 2025-03-30T19:40:11.417Z -->  
+[cordiod respiration multiple v2](https://editor.p5js.org/FabriGu/sketches/y6tuNdwVt)<!-- 2025-03-30T19:33:02.385Z -->  
+[cordiod respiration multiple v1](https://editor.p5js.org/FabriGu/sketches/WeNZgtGoO)<!-- 2025-03-30T18:48:45.008Z -->  
+[cordiod respiration](https://editor.p5js.org/FabriGu/sketches/MbERgo6m0)<!-- 2025-03-30T18:21:27.362Z -->  
+[\[Transformers.js\] Automatic Speech Recognition (whisper & moonshine) continuous nogap](https://editor.p5js.org/FabriGu/sketches/AE4g6U7Lo)<!-- 2025-03-28T20:34:30.849Z -->  
+[Olivine deer](https://editor.p5js.org/FabriGu/sketches/tGvSDIdFn)<!-- 2025-03-26T21:58:53.686Z -->  
+[Thrilling price](https://editor.p5js.org/FabriGu/sketches/ZNIixIunB)<!-- 2025-03-26T18:08:05.657Z -->  
+[\[Transformers.js\] Automatic Speech Recognition (whisper & moonshine) continuous](https://editor.p5js.org/FabriGu/sketches/xgW5E7GS4)<!-- 2025-03-24T16:19:45.729Z -->  
+[Unexpected cut](https://editor.p5js.org/FabriGu/sketches/KXXLxkNmd)<!-- 2025-03-24T15:12:55.106Z -->  
 [Cabana\! - Worley Noise Port](https://editor.p5js.org/FabriGu/sketches/NXeU73hUM)<!-- 2025-03-14T14:55:34.097Z -->  
 [ComfyUI Image-to-Image SDXL Lightning copy](https://editor.p5js.org/FabriGu/sketches/sAtm5BSbqf)<!-- 2025-03-12T15:01:01.654Z -->  
 [p5.comfyui-helper Hello World  \[firstExample\]](https://editor.p5js.org/FabriGu/sketches/sBGqAfbEU)<!-- 2025-03-12T14:40:48.334Z -->  

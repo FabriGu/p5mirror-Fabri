@@ -1,5 +1,7 @@
 # Sketches for FabriGu
-427 sketches  
+449 sketches  
+[\[Transformers.js\] Automatic Speech Recognition (whisper & moonshine) continuous](https://editor.p5js.org/FabriGu/sketches/xgW5E7GS4)<!-- 2025-03-24T16:19:45.729Z -->  
+[\[Transformers.js\] Automatic Speech Recognition (whisper & moonshine) continuous nogap](https://editor.p5js.org/FabriGu/sketches/AE4g6U7Lo)<!-- 2025-03-28T20:34:30.849Z -->  
 [1millionThings\_0](https://editor.p5js.org/FabriGu/sketches/dTD1pDp7L)<!-- 2025-01-07T13:26:54.639Z -->  
 [1millionThings\_1](https://editor.p5js.org/FabriGu/sketches/KaBJFLJ_A)<!-- 2025-01-07T13:37:21.021Z -->  
 [1millionThings\_2\_A1](https://editor.p5js.org/FabriGu/sketches/BG_JdsUk3)<!-- 2025-01-07T13:42:01.487Z -->  
@@ -54,11 +56,18 @@
 [arrangeByHnad\_2\_Train\_7\_segmentationInput\_FixedNewTrainingFrame\_1](https://editor.p5js.org/FabriGu/sketches/0XmZMz18p)<!-- 2025-03-01T19:31:39.588Z -->  
 [AskReplicateText2Image copy](https://editor.p5js.org/FabriGu/sketches/nIhlVK1mo)<!-- 2024-10-09T15:59:38.479Z -->  
 [AskReplicateText2Image copy copy](https://editor.p5js.org/FabriGu/sketches/ZdiDTAtKN)<!-- 2024-03-26T20:32:43.690Z -->  
+[attractors](https://editor.p5js.org/FabriGu/sketches/-jjvKqdi4)<!-- 2025-03-30T19:40:11.417Z -->  
 [autoArrangingAlgo](https://editor.p5js.org/FabriGu/sketches/o19Ob9PAl)<!-- 2025-02-23T21:55:47.820Z -->  
 [badCabinet](https://editor.p5js.org/FabriGu/sketches/CFlG5iBEI)<!-- 2024-07-31T16:17:41.675Z -->  
 [Bald piper](https://editor.p5js.org/FabriGu/sketches/Gk6_Lj5oy)<!-- 2024-03-02T16:48:59.666Z -->  
 [Black Hole](https://editor.p5js.org/FabriGu/sketches/4_Q-tKUmS)<!-- 2024-02-16T17:03:54.470Z -->  
 [BodyPix\_Webcam copy](https://editor.p5js.org/FabriGu/sketches/CyFREjkRg)<!-- 2024-04-17T22:19:02.858Z -->  
+[bodyPose\_Glitch\_v1](https://editor.p5js.org/FabriGu/sketches/3wbf11SxO)<!-- 2025-03-31T00:39:32.377Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded](https://editor.p5js.org/FabriGu/sketches/0xC2qhKdb)<!-- 2025-03-31T02:07:25.473Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiV1](https://editor.p5js.org/FabriGu/sketches/ju4YFbws9)<!-- 2025-03-31T02:31:24.410Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiV2](https://editor.p5js.org/FabriGu/sketches/hZdbQrapQ)<!-- 2025-04-04T02:10:24.574Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiV2 workingcopy](https://editor.p5js.org/FabriGu/sketches/er_HX1NFI)<!-- 2025-04-04T02:17:02.035Z -->  
+[bodyPose\_Glitch\_v2\_ShaderAdded\_multiWRONG](https://editor.p5js.org/FabriGu/sketches/mF1y71xE4)<!-- 2025-03-31T02:19:28.404Z -->  
 [bodySegmentation-mask-body-parts copy](https://editor.p5js.org/FabriGu/sketches/6OO8JHGk8)<!-- 2025-02-24T15:05:23.550Z -->  
 [bodySegmentation-mask-person copy](https://editor.p5js.org/FabriGu/sketches/hKjdSyQ6H)<!-- 2025-03-01T20:17:02.242Z -->  
 [BonB\_0](https://editor.p5js.org/FabriGu/sketches/yjClTmWLE)<!-- 2025-01-04T09:52:05.343Z -->  
@@ -86,6 +95,7 @@
 [busPattern\_8](https://editor.p5js.org/FabriGu/sketches/pLqHWOG7R)<!-- 2025-01-09T19:50:15.730Z -->  
 [busPattern\_9](https://editor.p5js.org/FabriGu/sketches/LF39XJulp)<!-- 2025-01-10T17:18:03.735Z -->  
 [Cabana\! - Worley Noise Port](https://editor.p5js.org/FabriGu/sketches/NXeU73hUM)<!-- 2025-03-14T14:55:34.097Z -->  
+[ChatBot Conversation With Hisotry](https://editor.p5js.org/FabriGu/sketches/3j7OJn3nx)<!-- 2025-04-04T14:02:43.791Z -->  
 [Class-Track copy](https://editor.p5js.org/FabriGu/sketches/Ig1N5IGTA)<!-- 2024-03-06T01:56:53.980Z -->  
 [claude simp string](https://editor.p5js.org/FabriGu/sketches/fbsc8yCmv)<!-- 2024-10-10T19:22:36.572Z -->  
 [Code of Music: Audio-Visual Instrument copy](https://editor.p5js.org/FabriGu/sketches/UtVdfDU06)<!-- 2024-03-08T01:40:18.309Z -->  
@@ -103,6 +113,9 @@
 [contentGenV2](https://editor.p5js.org/FabriGu/sketches/Kuy_i8wnF)<!-- 2024-11-16T22:57:04.146Z -->  
 [contentGenV2 - vid](https://editor.p5js.org/FabriGu/sketches/U4LL1BGW5)<!-- 2024-10-15T03:35:02.153Z -->  
 [contentGenV3 - drop](https://editor.p5js.org/FabriGu/sketches/YZdYIMj-z)<!-- 2024-11-16T22:53:54.320Z -->  
+[cordiod respiration](https://editor.p5js.org/FabriGu/sketches/MbERgo6m0)<!-- 2025-03-30T18:21:27.362Z -->  
+[cordiod respiration multiple v1](https://editor.p5js.org/FabriGu/sketches/WeNZgtGoO)<!-- 2025-03-30T18:48:45.008Z -->  
+[cordiod respiration multiple v2](https://editor.p5js.org/FabriGu/sketches/y6tuNdwVt)<!-- 2025-03-30T19:33:02.385Z -->  
 [cricle spin](https://editor.p5js.org/FabriGu/sketches/oEqmXabvM)<!-- 2024-02-16T16:01:10.949Z -->  
 [CubeRotationOnlyX](https://editor.p5js.org/FabriGu/sketches/6DAxBOr0x)<!-- 2024-07-08T15:29:16.673Z -->  
 [Dapper teller copy](https://editor.p5js.org/FabriGu/sketches/kexaxEzV8)<!-- 2024-10-03T17:09:04.826Z -->  
@@ -180,6 +193,7 @@
 [Impossible\_3](https://editor.p5js.org/FabriGu/sketches/O9-JHPErg)<!-- 2025-01-11T19:46:15.748Z -->  
 [Impossible\_4](https://editor.p5js.org/FabriGu/sketches/vAThl7vwr)<!-- 2025-01-12T20:02:08.134Z -->  
 [Impossible\_4 copy](https://editor.p5js.org/FabriGu/sketches/hr1-QSAzG)<!-- 2025-01-12T20:02:09.482Z -->  
+[ims-02 recursiveCircle Fullscreen](https://editor.p5js.org/FabriGu/sketches/MJOQaofdp)<!-- 2025-04-04T15:14:52.268Z -->  
 [infinite tunnel](https://editor.p5js.org/FabriGu/sketches/H0LaAsBXd)<!-- 2024-02-20T22:31:47.223Z -->  
 [infiniteScroll\_0](https://editor.p5js.org/FabriGu/sketches/zxO-BuIT7)<!-- 2025-01-28T22:53:31.273Z -->  
 [infiniteScroll\_1](https://editor.p5js.org/FabriGu/sketches/tXBkg5LkS)<!-- 2025-01-28T22:56:59.391Z -->  
@@ -203,6 +217,7 @@
 [justEyesMl5\_2](https://editor.p5js.org/FabriGu/sketches/9KRNoZF18)<!-- 2025-01-14T21:12:28.017Z -->  
 [justEyesMl5\_3](https://editor.p5js.org/FabriGu/sketches/HEkCWcS0l)<!-- 2025-01-14T21:21:23.988Z -->  
 [justEyesMl5\_4](https://editor.p5js.org/FabriGu/sketches/AWYRIWTc7)<!-- 2025-01-14T22:43:33.332Z -->  
+[L-systems](https://editor.p5js.org/FabriGu/sketches/UPbCbBIc2)<!-- 2025-03-30T19:49:54.135Z -->  
 [landscape\_0](https://editor.p5js.org/FabriGu/sketches/CWpHc-DQe)<!-- 2025-01-06T15:51:35.746Z -->  
 [landscape\_0 copy](https://editor.p5js.org/FabriGu/sketches/99e_DxcVk)<!-- 2025-01-06T15:51:39.825Z -->  
 [landscape\_1\_perlinNoiseGen](https://editor.p5js.org/FabriGu/sketches/zIlkbCFXX)<!-- 2025-01-06T15:53:26.522Z -->  
@@ -258,6 +273,7 @@
 [noTrigorNoise\_1](https://editor.p5js.org/FabriGu/sketches/mvQ56_FwN)<!-- 2025-01-27T23:14:22.432Z -->  
 [Object Detection TensorFlow.js video\_NoVid](https://editor.p5js.org/FabriGu/sketches/AgpbtM4Qd)<!-- 2025-01-30T15:02:41.016Z -->  
 [Object Detection TensorFlow.js video\_NoVid\_edgedetect](https://editor.p5js.org/FabriGu/sketches/o8GJ3HDzY)<!-- 2025-01-30T15:06:49.506Z -->  
+[Olivine deer](https://editor.p5js.org/FabriGu/sketches/tGvSDIdFn)<!-- 2025-03-26T21:58:53.686Z -->  
 [op\_art\_0](https://editor.p5js.org/FabriGu/sketches/9YJRilkPL)<!-- 2025-01-19T15:50:08.212Z -->  
 [op\_art\_1](https://editor.p5js.org/FabriGu/sketches/U0UJpriw6)<!-- 2025-01-19T17:33:12.568Z -->  
 [op\_art\_2](https://editor.p5js.org/FabriGu/sketches/tu6dQdBp6)<!-- 2025-01-19T18:46:57.148Z -->  
@@ -290,6 +306,8 @@
 [Pixel Sorter V6](https://editor.p5js.org/FabriGu/sketches/ZdXj6lDR4)<!-- 2024-11-01T19:20:07.231Z -->  
 [Pixel sorting copy](https://editor.p5js.org/FabriGu/sketches/NviK8dZgb)<!-- 2024-10-25T23:28:20.850Z -->  
 [PixelationDisplay Final](https://editor.p5js.org/FabriGu/sketches/xHsXw3FmV)<!-- 2024-10-21T15:15:17.177Z -->  
+[pixelFreezeV1](https://editor.p5js.org/FabriGu/sketches/w1-Sxh9y-)<!-- 2025-03-30T23:38:24.249Z -->  
+[pixelFreezeV2](https://editor.p5js.org/FabriGu/sketches/K8oAghdvp)<!-- 2025-03-30T23:38:36.245Z -->  
 [PoseNet\_webcam copy](https://editor.p5js.org/FabriGu/sketches/2_d7ANlZy)<!-- 2024-04-17T23:03:57.998Z -->  
 [PoseNet\_webcam renderingT V1](https://editor.p5js.org/FabriGu/sketches/nfJL7lUIh5)<!-- 2024-04-17T23:08:41.562Z -->  
 [PoseNet\_webcam renderingT v2](https://editor.p5js.org/FabriGu/sketches/zOZd0hKQH)<!-- 2024-04-17T23:11:46.253Z -->  
@@ -332,6 +350,9 @@
 [SerialComm Pot](https://editor.p5js.org/FabriGu/sketches/8t18ishw-)<!-- 2024-10-28T23:18:22.865Z -->  
 [SerialComm speaker](https://editor.p5js.org/FabriGu/sketches/LS2Ghbkak)<!-- 2024-10-28T23:51:11.364Z -->  
 [SerialComm speaker multi](https://editor.p5js.org/FabriGu/sketches/pXoEtqUqy)<!-- 2024-10-29T00:13:03.580Z -->  
+[simpleRecrusiveCircle+ML5](https://editor.p5js.org/FabriGu/sketches/z_g178Pjx)<!-- 2025-04-04T04:18:30.824Z -->  
+[simpleRecrusiveCircle+ML5 copy](https://editor.p5js.org/FabriGu/sketches/0X_vOT4Mg)<!-- 2025-04-04T11:59:11.982Z -->  
+[simpleRecrusiveCircleAddDelete](https://editor.p5js.org/FabriGu/sketches/EEuaOs1Jf)<!-- 2025-04-04T02:25:37.320Z -->  
 [simplified serial template BASE](https://editor.p5js.org/FabriGu/sketches/_m8--4_te)<!-- 2024-11-18T21:16:02.252Z -->  
 [simplified serial template copy](https://editor.p5js.org/FabriGu/sketches/2Mw3IpIAN)<!-- 2024-02-26T00:25:00.033Z -->  
 [simplified serial template copy copy](https://editor.p5js.org/FabriGu/sketches/bmnLL08s0)<!-- 2024-10-11T20:47:58.216Z -->  
@@ -372,6 +393,7 @@
 [teentaal visualization F](https://editor.p5js.org/FabriGu/sketches/Yv-LMXTuD)<!-- 2024-11-21T02:42:34.754Z -->  
 [teentaal visualization\_workingReverb](https://editor.p5js.org/FabriGu/sketches/Lg-6NU0AU)<!-- 2024-11-21T00:56:36.101Z -->  
 [Text in 3D copy](https://editor.p5js.org/FabriGu/sketches/FdeKdODYx)<!-- 2024-04-18T01:20:23.247Z -->  
+[Thrilling price](https://editor.p5js.org/FabriGu/sketches/ZNIixIunB)<!-- 2025-03-26T18:08:05.657Z -->  
 [TimedSendclaude](https://editor.p5js.org/FabriGu/sketches/rB-28IYY7)<!-- 2024-10-10T20:31:32.618Z -->  
 [TimedSendclaude Piexaltion](https://editor.p5js.org/FabriGu/sketches/E-vOrvATn)<!-- 2024-10-13T15:43:15.697Z -->  
 [TimedSendclaude Piexaltion reversed](https://editor.p5js.org/FabriGu/sketches/A7-du8TrA)<!-- 2024-10-13T19:04:19.367Z -->  
@@ -392,7 +414,7 @@
 [Twilight gojirasaurus](https://editor.p5js.org/FabriGu/sketches/LsXL13yfT)<!-- 2024-09-15T18:54:46.270Z -->  
 [two serial input](https://editor.p5js.org/FabriGu/sketches/dK34gU3KU)<!-- 2024-03-08T23:48:49.805Z -->  
 [two serial input copy copy](https://editor.p5js.org/FabriGu/sketches/NLYIVmfcN)<!-- 2024-03-12T02:21:05.945Z -->  
-[Unexpected cut](https://editor.p5js.org/FabriGu/sketches/KXXLxkNmd)<!-- 2025-03-21T14:34:39.053Z -->  
+[Unexpected cut](https://editor.p5js.org/FabriGu/sketches/KXXLxkNmd)<!-- 2025-03-24T15:12:55.106Z -->  
 [Unruly spruce](https://editor.p5js.org/FabriGu/sketches/7l-ODvnQY)<!-- 2024-08-04T21:49:35.850Z -->  
 [Us\_231124](https://editor.p5js.org/FabriGu/sketches/zzvrmunCS)<!-- 2024-11-24T00:10:04.216Z -->  
 [Us\_231124\_0C](https://editor.p5js.org/FabriGu/sketches/M8u3N7N_m)<!-- 2024-11-27T03:42:15.032Z -->  

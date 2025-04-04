@@ -8,7 +8,7 @@ let cam;
 
 function preload(){
   // load the shader
-  camShader = loadShader('effect.vert', 'effect.frag');
+  camShader = loadShader('effect.vert', 'effectOriginal.frag');
 }
 
 function setup() {
