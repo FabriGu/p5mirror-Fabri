@@ -1,7 +1,16 @@
 # Sketches for FabriGu
-449 sketches  
+458 sketches  
+[Jumpy air](https://editor.p5js.org/FabriGu/sketches/V8CLWhatq)<!-- 2025-04-11T15:26:06.690Z -->  
+[procedural circuit diagram V1](https://editor.p5js.org/FabriGu/sketches/KChUe9Y_d)<!-- 2025-04-11T14:59:44.792Z -->  
+[procedural circuit diagram V0](https://editor.p5js.org/FabriGu/sketches/i60-W2eZN)<!-- 2025-04-11T14:40:51.100Z -->  
+[ims03-fabri](https://editor.p5js.org/FabriGu/sketches/5y2x84BeB)<!-- 2025-04-11T13:32:55.983Z -->  
+[Semantic Search - Guccione.com Text Search V1](https://editor.p5js.org/FabriGu/sketches/XDgg7hVTf)<!-- 2025-04-11T12:04:08.545Z -->  
+[W8: createCapture() + Pixelation](https://editor.p5js.org/FabriGu/sketches/2fBEx7UBz)<!-- 2025-04-10T16:16:24.927Z -->  
+[Simple Image Semantic Search - Guccione.com Image Search V1](https://editor.p5js.org/FabriGu/sketches/1XYsbrfer)<!-- 2025-04-07T22:30:58.528Z -->  
+[Simple Image Semantic Search - Guccione.com Image Search V0](https://editor.p5js.org/FabriGu/sketches/aDC4s6UBQ)<!-- 2025-04-07T22:24:56.749Z -->  
+[Semantic Search - Guccione.com Text Search V0](https://editor.p5js.org/FabriGu/sketches/jmX_VCR_v)<!-- 2025-04-07T19:56:48.640Z -->  
+[ChatBot Conversation With Hisotry](https://editor.p5js.org/FabriGu/sketches/3j7OJn3nx)<!-- 2025-04-04T20:28:32.599Z -->  
 [ims-02 recursiveCircle Fullscreen](https://editor.p5js.org/FabriGu/sketches/MJOQaofdp)<!-- 2025-04-04T15:14:52.268Z -->  
-[ChatBot Conversation With Hisotry](https://editor.p5js.org/FabriGu/sketches/3j7OJn3nx)<!-- 2025-04-04T14:02:43.791Z -->  
 [simpleRecrusiveCircle+ML5 copy](https://editor.p5js.org/FabriGu/sketches/0X_vOT4Mg)<!-- 2025-04-04T11:59:11.982Z -->  
 [simpleRecrusiveCircle+ML5](https://editor.p5js.org/FabriGu/sketches/z_g178Pjx)<!-- 2025-04-04T04:18:30.824Z -->  
 [simpleRecrusiveCircleAddDelete](https://editor.p5js.org/FabriGu/sketches/EEuaOs1Jf)<!-- 2025-04-04T02:25:37.320Z -->  

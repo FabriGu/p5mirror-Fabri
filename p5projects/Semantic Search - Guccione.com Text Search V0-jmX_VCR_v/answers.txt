@@ -1,0 +1,20 @@
+The sky is blue because of Rayleigh scattering of sunlight in the atmosphere.
+An apple is a sweet fruit that typically has red, yellow, or green skin.
+New York City is the most populous city in the United States.
+Paris is the capital and largest city of France.
+The Great Wall of China is over 13,000 miles long.
+JavaScript is a programming language commonly used for web development.
+Machine learning is a subset of artificial intelligence that enables computers to learn from data.
+Water boils at 100 degrees Celsius at standard atmospheric pressure.
+The Earth orbits around the Sun once every 365.25 days.
+The theory of relativity was developed by Albert Einstein.
+Python is a high-level programming language known for its readability.
+The human body has 206 bones.
+Vector embeddings represent words or concepts as points in a multi-dimensional space.
+Transformers are a type of neural network architecture used in natural language processing.
+The first computer programmer was Ada Lovelace.
+Climate change refers to long-term shifts in temperature and weather patterns.
+DNA stands for deoxyribonucleic acid and contains genetic instructions.
+Democracy is a system of government where power is vested in the people.
+The Mona Lisa was painted by Leonardo da Vinci.
+Photosynthesis is the process by which plants convert light energy into chemical energy.

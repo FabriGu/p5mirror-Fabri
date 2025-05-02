@@ -6817,19 +6817,19 @@
         "fileType": "folder",
         "isSelectedFile": false,
         "_id": "67efe60407823aa6f7b4ed48",
-        "createdAt": "2025-04-04T14:02:43.791Z",
-        "updatedAt": "2025-04-04T14:02:43.791Z",
+        "createdAt": "2025-04-04T20:28:32.599Z",
+        "updatedAt": "2025-04-04T20:28:32.599Z",
         "id": "67efe60407823aa6f7b4ed48"
       },
       {
         "name": "sketch.js",
-        "content": "// Machine Learning for Creative Coding\n// https://github.com/shiffman/ML-for-Creative-Coding\n\nlet conversationHistory = [];\nlet inputBox;\nlet chatLog = \"\";\nlet chatP;\nlet generator;\nlet progress = 0;\n\nasync function setup() {\n  createCanvas(300, 10);\n  inputBox = createInput();\n  inputBox.size(300);\n  let sendButton = createButton(\"Send\");\n  sendButton.mousePressed(sendMessage);\n  chatP = createP();\n  conversationHistory.push({\n    role: \"system\",\n    content: \"You are \",\n  });\n\n  // Load the Transformers.js model pipeline\n  let pipeline = await loadTransformers();\n  generator = await pipeline(\n    \"text-generation\",\n    \"onnx-community/Llama-3.2-1B-Instruct-q4f16\",\n    {\n      dtype: \"q4f16\",\n      device: \"webgpu\",\n      progress_callback: (x) => {\n        //console.log(x);\n        progress = x.progress / 100;\n        if (x.status !== \"progress\") {\n          progress = 1;\n        }\n      },\n    }\n  );\n}\n\nasync function sendMessage() {\n  let userInput = inputBox.value();\n  conversationHistory.push({ role: \"user\", content: userInput });\n  chatLog = `You: ${userInput}</br></br>` + chatLog;\n  chatP.html(chatLog);\n\n  if (generator) {\n    // Generate a response based on the input prompt\n    const output = await generator(conversationHistory, {\n      max_new_tokens: 128,\n    });\n    const reply = output[0].generated_text.at(-1).content;\n    conversationHistory.push({ role: \"assistant\", content: reply });\n    chatLog = `Chatbot: ${reply}</br></br>` + chatLog;\n    chatP.html(chatLog);\n  } else {\n    console.log(\"Model not loaded yet, try again in a minute.\");\n  }\n}\n\nfunction draw() {\n  background(240);\n  fill(100, 100, 255);\n  rect(0, 0, progress * width, height);\n  noFill();\n  stroke(0);\n  rect(0, 0, progress * width, height);\n}\n",
+        "content": "// Machine Learning for Creative Coding\n// https://github.com/shiffman/ML-for-Creative-Coding\n\nlet conversationHistory = [];\nlet inputBox;\nlet chatLog = \"\";\nlet chatP;\nlet generator;\nlet progress = 0;\n\nasync function setup() {\n  createCanvas(300, 10);\n  inputBox = createInput();\n  inputBox.size(300);\n  let sendButton = createButton(\"Send\");\n  sendButton.mousePressed(sendMessage);\n  chatP = createP();\n  conversationHistory.push({\n    role: \"system\",\n    content: \"You are a hater\",\n  });\n\n  // Load the Transformers.js model pipeline\n  let pipeline = await loadTransformers();\n  generator = await pipeline(\n    \"text-generation\",\n    \"onnx-community/Llama-3.2-1B-Instruct-q4f16\",\n    {\n      dtype: \"q4f16\",\n      device: \"webgpu\",\n      progress_callback: (x) => {\n        //console.log(x);\n        progress = x.progress / 100;\n        if (x.status !== \"progress\") {\n          progress = 1;\n        }\n      },\n    }\n  );\n}\n\nasync function sendMessage() {\n  let userInput = inputBox.value();\n  conversationHistory.push({ role: \"user\", content: userInput });\n  chatLog = `You: ${userInput}</br></br>` + chatLog;\n  chatP.html(chatLog);\n\n  if (generator) {\n    // Generate a response based on the input prompt\n    const output = await generator(conversationHistory, {\n      max_new_tokens: 128,\n    });\n    const reply = output[0].generated_text.at(-1).content;\n    conversationHistory.push({ role: \"assistant\", content: reply });\n    chatLog = `Chatbot: ${reply}</br></br>` + chatLog;\n    chatP.html(chatLog);\n  } else {\n    console.log(\"Model not loaded yet, try again in a minute.\");\n  }\n}\n\nfunction draw() {\n  background(240);\n  fill(100, 100, 255);\n  rect(0, 0, progress * width, height);\n  noFill();\n  stroke(0);\n  rect(0, 0, progress * width, height);\n}\n",
         "children": [],
         "fileType": "file",
         "isSelectedFile": true,
         "_id": "67efe60407823aa6f7b4ed4a",
-        "createdAt": "2025-04-04T14:02:43.791Z",
-        "updatedAt": "2025-04-04T14:02:43.791Z",
+        "createdAt": "2025-04-04T20:28:32.599Z",
+        "updatedAt": "2025-04-04T20:28:32.599Z",
         "id": "67efe60407823aa6f7b4ed4a"
       },
       {
@@ -6839,8 +6839,8 @@
         "fileType": "file",
         "isSelectedFile": false,
         "_id": "67efe60407823aa6f7b4ed49",
-        "createdAt": "2025-04-04T14:02:43.791Z",
-        "updatedAt": "2025-04-04T14:02:43.791Z",
+        "createdAt": "2025-04-04T20:28:32.599Z",
+        "updatedAt": "2025-04-04T20:28:32.599Z",
         "id": "67efe60407823aa6f7b4ed49"
       },
       {
@@ -6850,8 +6850,8 @@
         "fileType": "file",
         "isSelectedFile": false,
         "_id": "67efe60407823aa6f7b4ed4b",
-        "createdAt": "2025-04-04T14:02:43.791Z",
-        "updatedAt": "2025-04-04T14:02:43.791Z",
+        "createdAt": "2025-04-04T20:28:32.599Z",
+        "updatedAt": "2025-04-04T20:28:32.599Z",
         "id": "67efe60407823aa6f7b4ed4b"
       },
       {
@@ -6861,13 +6861,13 @@
         "fileType": "file",
         "isSelectedFile": false,
         "_id": "67efe60407823aa6f7b4ed4c",
-        "createdAt": "2025-04-04T14:02:43.791Z",
-        "updatedAt": "2025-04-04T14:02:43.791Z",
+        "createdAt": "2025-04-04T20:28:32.599Z",
+        "updatedAt": "2025-04-04T20:28:32.599Z",
         "id": "67efe60407823aa6f7b4ed4c"
       }
     ],
     "createdAt": "2025-04-04T14:00:36.503Z",
-    "updatedAt": "2025-04-04T14:02:43.791Z",
+    "updatedAt": "2025-04-04T20:28:32.599Z",
     "id": "3j7OJn3nx"
   },
   {
@@ -14301,6 +14301,89 @@
     "id": "MJOQaofdp"
   },
   {
+    "_id": "5y2x84BeB",
+    "name": "ims03-fabri",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f89792efd2a9642aa9cb6d",
+          "67f89793efd2a9642aa9cb72",
+          "67f89793efd2a9642aa9cb71",
+          "67f89792efd2a9642aa9cb6e",
+          "67f89792efd2a9642aa9cb6f"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f8975e02bb110249db692a",
+        "createdAt": "2025-04-11T13:32:55.983Z",
+        "updatedAt": "2025-04-11T13:32:55.983Z",
+        "id": "67f8975e02bb110249db692a"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main id=\"canvas-container\">\n    </main>\n\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f89792efd2a9642aa9cb6d",
+        "createdAt": "2025-04-11T13:32:55.983Z",
+        "updatedAt": "2025-04-11T13:32:55.983Z",
+        "id": "67f89792efd2a9642aa9cb6d"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// parts of code adapted from Mimi's ICM class examples ->  https://editor.p5js.org/icm4.0/sketches/ZsjXSIVi0\n\n// link on github pages\n// https://fabrigu.github.io/Ims-2025-fg/\n\n// video \nlet cam;\n\n// size of the pixelation \nlet cellSz = 40;\n\n// Current position of the cell being drawn (starts at 0, 0 top left)\nlet curX = 0;\nlet curY = 0;\n\n// Parameters object for URL and storage\nlet paramsJson = {};\n\n// Previously captured cells\nlet capturedCells = [];\n\nfunction setup() {\n  let canvas = createCanvas(640, 480);\n\n\n   // Use the ID of the main element\n    // used claude to figure this part out\n   canvas.parent('canvas-container');\n  \n  cam = createCapture(VIDEO);\n  cam.hide();\n\n  // if have previously loaded cells get them from localstorage\n  loadCapturedCells();\n  \n  // Get URL parameters (if any)\n  let params = getUrlParams();\n  \n  if (params) {\n    // Convert URL parameters to JSON and use them\n    paramsJson = urlParamsToJson(params);\n    \n    // Set current position from URL parameters\n    curX = parseInt(paramsJson.x) || 0;\n    curY = parseInt(paramsJson.y) || 0;\n  }\n}\n\n// Convert URL parameters to a JSON object\n// taken from this website https://www.tutorialspoint.com/how-to-convert-url-parameters-to-json-in-javascript \nfunction urlParamsToJson(url) {\n  const queryString = url.split('?')[1];\n  if (!queryString) return {};\n  \n  return queryString.split('&').reduce((acc, param) => {\n    const [key, value] = param.split('=');\n    acc[key] = decodeURIComponent(value);\n    return acc;\n  }, {});\n}\n\n// Get URL parameters from current window location\n// help from Claude.ai\nfunction getUrlParams() {\n  let query = window.location.search;\n  return query.length > 0 ? query : null;\n}\n\n// Load previously captured cells from localStorage\n// help from Claude.ai\nfunction loadCapturedCells() {\n  const stored = localStorage.getItem('capturedCells');\n  capturedCells = stored ? JSON.parse(stored) : [];\n}\n\n// Save a new cell to localStorage\n// help from Claude.ai\nfunction saveCellToStorage(x, y, r, g, b) {\n  capturedCells.push({ x, y, r, g, b });\n  localStorage.setItem('capturedCells', JSON.stringify(capturedCells));\n}\n\nfunction draw() {\n  background(220);\n  // first draw any cells we already got previously\n  drawCapturedCells();\n  \n  // when camer ready\n  // process cells \n  if (cam.loadedmetadata && frameCount > 30) { // Wait for camera to initialize\n    cam.loadPixels();\n    \n    if (cam.pixels.length > 0) {\n      processCurrentCell();\n      \n      noLoop();\n      \n      setTimeout(refreshPage, 100);\n    }\n  }\n}\n\n// Draw all previously captured cells\nfunction drawCapturedCells() {\n  for (let cell of capturedCells) {\n    fill(cell.r, cell.g, cell.b);\n    rect(cell.x, cell.y, cellSz, cellSz);\n  }\n}\n\n// Process the current cell from the video\n\n\nfunction processCurrentCell() {\n  // Check if we're still within canvas bounds\n  if (curX < width && curY < height) {\n    // Calculate pixel index\n    let i = (curY * width + curX) * 4;\n    \n    // Get RGB values from current position\n    let r = cam.pixels[i];\n    let g = cam.pixels[i + 1];\n    let b = cam.pixels[i + 2];\n    \n    // Fill with the rgb values of the pixel\n    fill(r, g, b);\n    \n    // Draw the current cell\n    rect(curX, curY, cellSz, cellSz);\n    \n    // Save this cell to localStorage\n    saveCellToStorage(curX, curY, r, g, b);\n    \n    // Calculate next position\n    calculateNextPosition();\n  }\n}\n\n// Calculate the next x,y position and update paramsJson\nfunction calculateNextPosition() {\n  // Move to next cell position\n  curX += cellSz;\n  \n  // If reached end of row, move to next row\n  if (curX >= width) {\n    curX = 0;\n    curY += cellSz;\n  }\n  \n  // Reset if entire canvas is filled\n  if (curY >= height) {\n    curX = 0;\n    curY = 0;\n\n    // localStorage.removeItem('capturedCells');\n    // capturedCells = [];\n  }\n  \n  // Update parameters for next refresh\n  paramsJson.x = curX;\n  paramsJson.y = curY;\n}\n\n// Open a new page with updated parameters\n// got from W3 schools documentation -> https://www.w3schools.com/jsref/met_win_open.asp\nfunction refreshPage() {\n  const baseUrl = window.location.pathname;\n  const queryParams = `?x=${paramsJson.x}&y=${paramsJson.y}`;\n  window.location.href = baseUrl + queryParams;\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f89792efd2a9642aa9cb6e",
+        "createdAt": "2025-04-11T13:32:55.983Z",
+        "updatedAt": "2025-04-11T13:32:55.983Z",
+        "id": "67f89792efd2a9642aa9cb6e"
+      },
+      {
+        "name": "style.css",
+        "content": "/* html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n} */\n\nhtml, body {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #f0f0f0;\n}\n\nmain {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\ncanvas {\n  display: block;\n  width: 50%; /* Makes the canvas take up 50% of the container width */\n  height: auto; /* Maintains aspect ratio */\n  max-height: 80vh; /* Prevents it from getting too tall */\n  object-fit: contain; /* Ensures the entire canvas is visible */\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow */\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f89792efd2a9642aa9cb6f",
+        "createdAt": "2025-04-11T13:32:55.983Z",
+        "updatedAt": "2025-04-11T13:32:55.983Z",
+        "id": "67f89792efd2a9642aa9cb6f"
+      },
+      {
+        "name": "p5.sound.min.js",
+        "content": "",
+        "url": "https://assets.editor.p5js.org/65cbf2cc964924001a988c17/9c608ed5-4c3e-442d-bb73-03d42805e114.js",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f89793efd2a9642aa9cb71",
+        "createdAt": "2025-04-11T13:32:55.983Z",
+        "updatedAt": "2025-04-11T13:32:55.983Z",
+        "id": "67f89793efd2a9642aa9cb71"
+      },
+      {
+        "name": "p5.js",
+        "content": "",
+        "url": "https://assets.editor.p5js.org/65cbf2cc964924001a988c17/0d4b9e29-dcd3-40ac-bfa5-c247c5e785fc.js",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f89793efd2a9642aa9cb72",
+        "createdAt": "2025-04-11T13:32:55.983Z",
+        "updatedAt": "2025-04-11T13:32:55.983Z",
+        "id": "67f89793efd2a9642aa9cb72"
+      }
+    ],
+    "updatedAt": "2025-04-11T13:32:55.983Z",
+    "createdAt": "2025-04-11T04:28:36.373Z",
+    "id": "5y2x84BeB"
+  },
+  {
     "_id": "H0LaAsBXd",
     "name": "infinite tunnel",
     "files": [
@@ -15360,6 +15443,63 @@
     "createdAt": "2024-10-10T12:36:43.535Z",
     "updatedAt": "2024-10-10T19:42:02.461Z",
     "id": "tUHwqo038"
+  },
+  {
+    "_id": "V8CLWhatq",
+    "name": "Jumpy air",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f9309f37448211c08b4dc6",
+          "67f9309f37448211c08b4dc5",
+          "67f9309f37448211c08b4dc7"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f9309f37448211c08b4dc8",
+        "createdAt": "2025-04-11T15:26:06.690Z",
+        "updatedAt": "2025-04-11T15:26:06.690Z",
+        "id": "67f9309f37448211c08b4dc8"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Enhanced Sandpiles Simulation\n// Based on Daniel Shiffman's code (http://codingtra.in)\n// Modified for fullscreen and simplified export\n\n// Configuration object for easy customization\nconst config = {\n  // Simulation parameters\n  initialSand: 1000000000,\n  topplePerFrame: 50,\n  \n  // Pattern size control\n  patternSize: 1.0, // Scale factor for pattern size (1.0 = normal)\n  pixelSize: 1,     // Size of each \"pixel\" cell (1 = normal, higher = bigger pixels)\n  \n  // Colors [r, g, b]\n  defaultColor: [255, 0, 255], // background/overflow color\n  colors: [\n    [255, 255, 0],  // 0 grains\n    [0, 185, 63],   // 1 grain\n    [0, 104, 255],  // 2 grains\n    [122, 0, 229]   // 3 grains\n  ],\n  \n  // Simulation state\n  isPaused: false,\n  showUI: true\n};\n\n// Simulation variables\nlet sandpiles;\nlet nextpiles;\nlet exportButton;\nlet pauseButton;\nlet resetButton;\nlet uiToggleButton;\n\nfunction setup() {\n  // Create fullscreen canvas\n  createCanvas(windowWidth, windowHeight);\n  pixelDensity(1);\n  \n  // Initialize simulation\n  initializeSimulation();\n  \n  // Create UI elements\n  createUI();\n}\n\nfunction windowResized() {\n  resizeCanvas(windowWidth, windowHeight);\n  // Reinitialize simulation when window is resized\n  initializeSimulation();\n}\n\nfunction initializeSimulation() {\n  // Calculate effective grid size based on pixel size\n  const effectiveWidth = Math.floor(width / config.pixelSize);\n  const effectiveHeight = Math.floor(height / config.pixelSize);\n  \n  // Initialize sandpiles arrays with adjusted dimensions\n  sandpiles = new Array(effectiveWidth).fill().map(i => new Array(effectiveHeight).fill(0));\n  nextpiles = new Array(effectiveWidth).fill().map(i => new Array(effectiveHeight).fill(0));\n  \n  // Set initial pile at center\n  const centerX = Math.floor(effectiveWidth / 2);\n  const centerY = Math.floor(effectiveHeight / 2);\n  sandpiles[centerX][centerY] = config.initialSand;\n  \n  // Set background color\n  background(config.defaultColor[0], config.defaultColor[1], config.defaultColor[2]);\n}\n\nfunction createUI() {\n  // Create container div for UI elements\n  const uiContainer = createDiv();\n  uiContainer.id('ui-container');\n  uiContainer.style('position', 'absolute');\n  uiContainer.style('top', '10px');\n  uiContainer.style('left', '10px');\n  uiContainer.style('background-color', 'rgba(0, 0, 0, 0.7)');\n  uiContainer.style('padding', '10px');\n  uiContainer.style('border-radius', '5px');\n  uiContainer.style('z-index', '100');\n  \n  // Create sandbox controls\n  createP('Sandpile Controls').parent(uiContainer).style('color', 'white').style('margin', '5px 0');\n  \n  // Initial sand slider\n  createSpan('Initial Sand: ').parent(uiContainer).style('color', 'white');\n  const sandSlider = createSlider(1000, 10000000000, config.initialSand, 1000000);\n  sandSlider.parent(uiContainer);\n  sandSlider.input(() => {\n    config.initialSand = sandSlider.value();\n  });\n  \n  // Pattern size slider\n  createP('').parent(uiContainer);\n  createSpan('Pattern Size: ').parent(uiContainer).style('color', 'white');\n  const sizeSlider = createSlider(0.1, 3.0, config.patternSize, 0.1);\n  sizeSlider.parent(uiContainer);\n  sizeSlider.input(() => {\n    config.patternSize = sizeSlider.value();\n  });\n  \n  // Pixel size slider\n  createP('').parent(uiContainer);\n  createSpan('Pixel Size: ').parent(uiContainer).style('color', 'white');\n  const pixelSizeSlider = createSlider(1, 20, config.pixelSize, 1);\n  pixelSizeSlider.parent(uiContainer);\n  pixelSizeSlider.input(() => {\n    // Store the old pixel size\n    const oldPixelSize = config.pixelSize;\n    config.pixelSize = pixelSizeSlider.value();\n    \n    // Only reinitialize if pixel size actually changed\n    if (oldPixelSize !== config.pixelSize) {\n      initializeSimulation();\n    }\n  });\n  \n  // Topple per frame slider\n  createP('').parent(uiContainer);\n  createSpan('Topples Per Frame: ').parent(uiContainer).style('color', 'white');\n  const toppleSlider = createSlider(1, 200, config.topplePerFrame, 1);\n  toppleSlider.parent(uiContainer);\n  toppleSlider.input(() => {\n    config.topplePerFrame = toppleSlider.value();\n  });\n  \n  // Color pickers\n  createP('Colors').parent(uiContainer).style('color', 'white').style('margin', '10px 0 5px 0');\n  \n  // Default color picker\n  createSpan('Background: ').parent(uiContainer).style('color', 'white');\n  const defaultColorPicker = createColorPicker(color(config.defaultColor));\n  defaultColorPicker.parent(uiContainer);\n  defaultColorPicker.input(() => {\n    const c = defaultColorPicker.color().levels;\n    config.defaultColor = [c[0], c[1], c[2]];\n  });\n  \n  // Color pickers for each state\n  createP('').parent(uiContainer);\n  for (let i = 0; i < config.colors.length; i++) {\n    createSpan(`State ${i}: `).parent(uiContainer).style('color', 'white');\n    const picker = createColorPicker(color(config.colors[i]));\n    picker.parent(uiContainer);\n    picker.input(() => {\n      const c = picker.color().levels;\n      config.colors[i] = [c[0], c[1], c[2]];\n    });\n    createP('').parent(uiContainer);\n  }\n  \n  // Create buttons\n  pauseButton = createButton('Pause');\n  pauseButton.parent(uiContainer);\n  pauseButton.mousePressed(() => {\n    config.isPaused = !config.isPaused;\n    pauseButton.html(config.isPaused ? 'Resume' : 'Pause');\n  });\n  \n  resetButton = createButton('Reset');\n  resetButton.parent(uiContainer);\n  resetButton.mousePressed(() => {\n    initializeSimulation();\n  });\n  \n  // Export button\n  createP('').parent(uiContainer);\n  exportButton = createButton('Save Image');\n  exportButton.parent(uiContainer);\n  exportButton.mousePressed(() => {\n    saveCanvas('sandpile_' + Date.now(), 'png');\n  });\n  \n  // UI toggle button (outside the container)\n  uiToggleButton = createButton('Toggle UI');\n  uiToggleButton.position(10, height - 40);\n  uiToggleButton.mousePressed(() => {\n    config.showUI = !config.showUI;\n    uiContainer.style('display', config.showUI ? 'block' : 'none');\n  });\n  \n  // Add help text\n  const helpText = createP(\"Adjusting 'Pattern Size' changes the mandala size. Larger values create bigger patterns.<br>'Pixel Size' controls the resolution/blockiness of the image.\");\n  helpText.parent(uiContainer);\n  helpText.style('color', 'white');\n  helpText.style('font-size', '12px');\n  helpText.style('margin-top', '10px');\n}\n\nfunction topple() {\n  // Calculate effective dimensions\n  const effectiveWidth = sandpiles.length;\n  const effectiveHeight = sandpiles[0].length;\n  \n  // Copy current state to next state\n  for (let x = 0; x < effectiveWidth; x++) {\n    for (let y = 0; y < effectiveHeight; y++) {\n      nextpiles[x][y] = sandpiles[x][y];\n    }\n  }\n  \n  // Perform toppling with pattern size control\n  for (let x = 0; x < effectiveWidth; x++) {\n    for (let y = 0; y < effectiveHeight; y++) {\n      let num = sandpiles[x][y];\n      if (num >= 4) {\n        nextpiles[x][y] -= 4;\n        \n        // Calculate spread distance based on pattern size setting\n        const spreadDistance = Math.max(1, Math.round(config.patternSize));\n        \n        // Apply the toppling with configured spread distance\n        // Make sure we're not accessing outside the array bounds\n        if (x + spreadDistance < effectiveWidth) \n          nextpiles[x + spreadDistance][y]++;\n        if (x - spreadDistance >= 0) \n          nextpiles[x - spreadDistance][y]++;\n        if (y + spreadDistance < effectiveHeight) \n          nextpiles[x][y + spreadDistance]++;\n        if (y - spreadDistance >= 0) \n          nextpiles[x][y - spreadDistance]++;\n      }\n    }\n  }\n  \n  // Swap arrays\n  [sandpiles, nextpiles] = [nextpiles, sandpiles];\n}\n\nfunction renderSimple() {\n  // Direct drawing approach with pixel size control\n  background(config.defaultColor[0], config.defaultColor[1], config.defaultColor[2]);\n  \n  noStroke();\n  \n  // Calculate effective dimensions based on pixel size\n  const effectiveWidth = sandpiles.length;\n  const effectiveHeight = sandpiles[0].length;\n  \n  // Draw each cell as a rectangle with the configured pixel size\n  for (let x = 0; x < effectiveWidth; x++) {\n    for (let y = 0; y < effectiveHeight; y++) {\n      const num = sandpiles[x][y];\n      if (num >= 0 && num < 4) {\n        const col = config.colors[num];\n        fill(col[0], col[1], col[2]);\n        rect(x * config.pixelSize, y * config.pixelSize, config.pixelSize, config.pixelSize);\n      }\n    }\n  }\n}\n\nfunction draw() {\n  // Only update if not paused\n  if (!config.isPaused) {\n    // Render current state using the simpler approach\n    renderSimple();\n    \n    // Perform toppling multiple times per frame for faster simulation\n    for (let i = 0; i < config.topplePerFrame; i++) {\n      topple();\n    }\n  }\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f9309f37448211c08b4dc5",
+        "createdAt": "2025-04-11T15:26:06.690Z",
+        "updatedAt": "2025-04-11T15:26:06.690Z",
+        "id": "67f9309f37448211c08b4dc5"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f9309f37448211c08b4dc6",
+        "createdAt": "2025-04-11T15:26:06.690Z",
+        "updatedAt": "2025-04-11T15:26:06.690Z",
+        "id": "67f9309f37448211c08b4dc6"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f9309f37448211c08b4dc7",
+        "createdAt": "2025-04-11T15:26:06.690Z",
+        "updatedAt": "2025-04-11T15:26:06.690Z",
+        "id": "67f9309f37448211c08b4dc7"
+      }
+    ],
+    "updatedAt": "2025-04-11T15:26:06.690Z",
+    "createdAt": "2025-04-11T15:19:16.683Z",
+    "id": "V8CLWhatq"
   },
   {
     "_id": "kSMGQNosP",
@@ -23137,6 +23277,117 @@
     "id": "e88npe_l5"
   },
   {
+    "_id": "i60-W2eZN",
+    "name": "procedural circuit diagram V0",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f9296cefd2a9642aa9cb74",
+          "67f9296cefd2a9642aa9cb73",
+          "67f9296cefd2a9642aa9cb75"
+        ],
+        "fileType": "folder",
+        "_id": "67f9296cefd2a9642aa9cb76",
+        "createdAt": "2025-04-11T14:40:51.100Z",
+        "updatedAt": "2025-04-11T14:40:51.100Z",
+        "id": "67f9296cefd2a9642aa9cb76"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Procedural Circuit Diagram Generator\n// This sketch creates a randomly generated circuit diagram that resembles a maze\n// with properly connected electronic components\n\nlet grid = [];\nlet cellSize = 30;\nlet cols, rows;\nlet components = [];\n\n// Circuit components definitions\nconst COMPONENTS = {\n  RESISTOR: 0,\n  CAPACITOR: 1,\n  INDUCTOR: 2,\n  DIODE: 3,\n  SWITCH: 4,\n  BATTERY: 5,\n  GROUND: 6,\n  LED: 7,\n  TRANSISTOR: 8,\n  WIRE: 9\n};\n\nfunction setup() {\n  createCanvas(800, 600);\n  cols = floor(width / cellSize);\n  rows = floor(height / cellSize);\n  \n  // Initialize grid\n  for (let i = 0; i < cols; i++) {\n    grid[i] = [];\n    for (let j = 0; j < rows; j++) {\n      grid[i][j] = {\n        visited: false,\n        // Top, right, bottom, left walls\n        walls: [true, true, true, true],\n        // Component type (if any)\n        component: null,\n        // Orientation (0: horizontal, 1: vertical)\n        orientation: Math.random() > 0.5 ? 0 : 1\n      };\n    }\n  }\n  \n  // Generate maze using DFS algorithm\n  generateMaze(0, 0);\n  \n  // Place components\n  placeComponents();\n  \n  // Set random component for testing\n  frameRate(30);\n}\n\nfunction draw() {\n  background(240);\n  \n  // Draw grid and components\n  for (let i = 0; i < cols; i++) {\n    for (let j = 0; j < rows; j++) {\n      let x = i * cellSize;\n      let y = j * cellSize;\n      \n      // Draw walls if they exist\n      stroke(0);\n      strokeWeight(2);\n      \n      if (grid[i][j].walls[0]) line(x, y, x + cellSize, y); // Top\n      if (grid[i][j].walls[1]) line(x + cellSize, y, x + cellSize, y + cellSize); // Right\n      if (grid[i][j].walls[2]) line(x, y + cellSize, x + cellSize, y + cellSize); // Bottom\n      if (grid[i][j].walls[3]) line(x, y, x, y + cellSize); // Left\n      \n      // Draw component if it exists\n      if (grid[i][j].component !== null) {\n        drawComponent(\n          x + cellSize / 2, \n          y + cellSize / 2, \n          grid[i][j].component, \n          grid[i][j].orientation,\n          cellSize * 0.8 // Size of component\n        );\n      }\n    }\n  }\n  \n  // Display instructions\n  fill(0);\n  noStroke();\n  textSize(14);\n  text(\"Press SPACE to generate a new circuit\", 20, height - 20);\n}\n\nfunction keyPressed() {\n  if (keyCode === 32) { // SPACE\n    // Reset grid\n    for (let i = 0; i < cols; i++) {\n      for (let j = 0; j < rows; j++) {\n        grid[i][j] = {\n          visited: false,\n          walls: [true, true, true, true],\n          component: null,\n          orientation: Math.random() > 0.5 ? 0 : 1\n        };\n      }\n    }\n    \n    // Regenerate maze\n    generateMaze(0, 0);\n    \n    // Replace components\n    placeComponents();\n  }\n}\n\n// DFS maze generation algorithm\nfunction generateMaze(x, y) {\n  grid[x][y].visited = true;\n  \n  // Define directions: top, right, bottom, left\n  const directions = [\n    [0, -1],\n    [1, 0],\n    [0, 1],\n    [-1, 0]\n  ];\n  \n  // Shuffle directions for randomness\n  shuffleArray(directions);\n  \n  for (let i = 0; i < directions.length; i++) {\n    let nextX = x + directions[i][0];\n    let nextY = y + directions[i][1];\n    \n    if (nextX >= 0 && nextX < cols && nextY >= 0 && nextY < rows && !grid[nextX][nextY].visited) {\n      // Remove walls between current cell and next cell\n      if (directions[i][0] === 0 && directions[i][1] === -1) { // Top\n        grid[x][y].walls[0] = false;\n        grid[nextX][nextY].walls[2] = false;\n      } else if (directions[i][0] === 1 && directions[i][1] === 0) { // Right\n        grid[x][y].walls[1] = false;\n        grid[nextX][nextY].walls[3] = false;\n      } else if (directions[i][0] === 0 && directions[i][1] === 1) { // Bottom\n        grid[x][y].walls[2] = false;\n        grid[nextX][nextY].walls[0] = false;\n      } else if (directions[i][0] === -1 && directions[i][1] === 0) { // Left\n        grid[x][y].walls[3] = false;\n        grid[nextX][nextY].walls[1] = false;\n      }\n      \n      // Continue recursively\n      generateMaze(nextX, nextY);\n    }\n  }\n}\n\n// Place components throughout the circuit intelligently\nfunction placeComponents() {\n  // Start with a battery\n  let batteryX = floor(random(cols));\n  let batteryY = floor(random(rows));\n  grid[batteryX][batteryY].component = COMPONENTS.BATTERY;\n  \n  // Add ground somewhere\n  let groundX, groundY;\n  do {\n    groundX = floor(random(cols));\n    groundY = floor(random(rows));\n  } while (groundX === batteryX && groundY === batteryY);\n  \n  grid[groundX][groundY].component = COMPONENTS.GROUND;\n  \n  // Place other components in empty spots\n  const componentCount = floor(cols * rows * 0.3); // Fill about 30% with components\n  \n  for (let i = 0; i < componentCount; i++) {\n    let x, y;\n    do {\n      x = floor(random(cols));\n      y = floor(random(rows));\n    } while (grid[x][y].component !== null);\n    \n    // Check if this cell has at least one open wall (for connectivity)\n    if (!grid[x][y].walls[0] || !grid[x][y].walls[1] || \n        !grid[x][y].walls[2] || !grid[x][y].walls[3]) {\n      \n      // Determine orientation based on which walls are open\n      if (!grid[x][y].walls[0] && !grid[x][y].walls[2]) {\n        grid[x][y].orientation = 1; // Vertical\n      } else if (!grid[x][y].walls[1] && !grid[x][y].walls[3]) {\n        grid[x][y].orientation = 0; // Horizontal\n      }\n      \n      // Random component (except battery and ground which are already placed)\n      const componentOptions = [\n        COMPONENTS.RESISTOR, \n        COMPONENTS.CAPACITOR, \n        COMPONENTS.INDUCTOR,\n        COMPONENTS.DIODE,\n        COMPONENTS.SWITCH,\n        COMPONENTS.LED,\n        COMPONENTS.TRANSISTOR,\n        COMPONENTS.WIRE\n      ];\n      grid[x][y].component = random(componentOptions);\n    }\n  }\n}\n\n// Draw electronic component at specified position with given orientation\nfunction drawComponent(x, y, type, orientation, size) {\n  push();\n  translate(x, y);\n  if (orientation === 1) {\n    rotate(HALF_PI); // Rotate for vertical orientation\n  }\n  \n  stroke(0);\n  strokeWeight(1.5);\n  \n  const halfSize = size / 2;\n  \n  switch (type) {\n    case COMPONENTS.RESISTOR:\n      // Resistor zigzag symbol\n      line(-halfSize, 0, -halfSize/2, 0);\n      beginShape();\n      vertex(-halfSize/2, 0);\n      vertex(-halfSize/3, -size/6);\n      vertex(-halfSize/6, size/6);\n      vertex(0, -size/6);\n      vertex(halfSize/6, size/6);\n      vertex(halfSize/3, -size/6);\n      vertex(halfSize/2, 0);\n      endShape();\n      line(halfSize/2, 0, halfSize, 0);\n      break;\n      \n    case COMPONENTS.CAPACITOR:\n      // Capacitor symbol\n      line(-halfSize, 0, -size/8, 0);\n      line(halfSize, 0, size/8, 0);\n      line(-size/8, -size/4, -size/8, size/4);\n      line(size/8, -size/4, size/8, size/4);\n      break;\n      \n    case COMPONENTS.INDUCTOR:\n      // Inductor/coil symbol\n      line(-halfSize, 0, -size/3, 0);\n      arc(-size/6, 0, size/6, size/3, -HALF_PI, PI+HALF_PI);\n      arc(0, 0, size/6, size/3, -HALF_PI, PI+HALF_PI);\n      arc(size/6, 0, size/6, size/3, -HALF_PI, PI+HALF_PI);\n      line(size/3, 0, halfSize, 0);\n      break;\n      \n    case COMPONENTS.DIODE:\n      // Diode symbol\n      line(-halfSize, 0, -size/6, 0);\n      line(halfSize, 0, size/6, 0);\n      beginShape();\n      vertex(-size/6, -size/6);\n      vertex(size/6, 0);\n      vertex(-size/6, size/6);\n      vertex(-size/6, -size/6);\n      endShape(CLOSE);\n      line(size/6, -size/6, size/6, size/6);\n      break;\n      \n    case COMPONENTS.SWITCH:\n      // Switch symbol\n      line(-halfSize, 0, -size/6, 0);\n      line(size/6, 0, halfSize, 0);\n      line(-size/6, 0, size/6, -size/5);\n      fill(255);\n      ellipse(-size/6, 0, size/10);\n      ellipse(size/6, 0, size/10);\n      break;\n      \n    case COMPONENTS.BATTERY:\n      // Battery symbol\n      line(-halfSize, 0, -size/6, 0);\n      line(size/6, 0, halfSize, 0);\n      line(-size/6, -size/5, -size/6, size/5);\n      line(-size/12, -size/3, -size/12, size/3);\n      line(size/6, -size/6, size/6, size/6);\n      break;\n      \n    case COMPONENTS.GROUND:\n      // Ground symbol\n      line(-size/16, 0, size/16, 0);\n      line(0, 0, 0, size/6);\n      line(-size/5, size/6, size/5, size/6);\n      line(-size/6, size/4, size/6, size/4);\n      line(-size/8, size/3, size/8, size/3);\n      break;\n      \n    case COMPONENTS.LED:\n      // LED symbol (diode with arrows)\n      line(-halfSize, 0, -size/6, 0);\n      line(halfSize, 0, size/6, 0);\n      beginShape();\n      vertex(-size/6, -size/6);\n      vertex(size/6, 0);\n      vertex(-size/6, size/6);\n      vertex(-size/6, -size/6);\n      endShape(CLOSE);\n      line(size/6, -size/6, size/6, size/6);\n      \n      // Light rays\n      line(size/5, -size/5, size/3, -size/3);\n      line(size/3, -size/5, size/3, -size/3);\n      line(size/5, -size/3, size/3, -size/3);\n      \n      line(size/5, size/5, size/3, size/3);\n      line(size/3, size/5, size/3, size/3);\n      line(size/5, size/3, size/3, size/3);\n      break;\n      \n    case COMPONENTS.TRANSISTOR:\n      // Transistor symbol (NPN)\n      line(-halfSize, 0, -size/6, 0);\n      line(-size/6, -size/3, -size/6, size/3);\n      line(-size/6, -size/6, size/6, -size/3);\n      line(-size/6, size/6, size/6, size/3);\n      line(size/6, -size/3, size/6, -halfSize);\n      line(size/6, size/3, size/6, halfSize);\n      \n      // Base\n      line(-size/6, 0, size/12, 0);\n      break;\n      \n    case COMPONENTS.WIRE:\n      // Simple wire/connection\n      line(-halfSize, 0, halfSize, 0);\n      break;\n  }\n  \n  pop();\n}\n\n// Utility function to shuffle array in place\nfunction shuffleArray(array) {\n  for (let i = array.length - 1; i > 0; i--) {\n    const j = Math.floor(Math.random() * (i + 1));\n    [array[i], array[j]] = [array[j], array[i]];\n  }\n  return array;\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f9296cefd2a9642aa9cb73",
+        "createdAt": "2025-04-11T14:40:51.100Z",
+        "updatedAt": "2025-04-11T14:40:51.100Z",
+        "id": "67f9296cefd2a9642aa9cb73"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "67f9296cefd2a9642aa9cb74",
+        "createdAt": "2025-04-11T14:40:51.100Z",
+        "updatedAt": "2025-04-11T14:40:51.100Z",
+        "id": "67f9296cefd2a9642aa9cb74"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "_id": "67f9296cefd2a9642aa9cb75",
+        "createdAt": "2025-04-11T14:40:51.100Z",
+        "updatedAt": "2025-04-11T14:40:51.100Z",
+        "id": "67f9296cefd2a9642aa9cb75"
+      }
+    ],
+    "updatedAt": "2025-04-11T14:40:51.100Z",
+    "createdAt": "2025-04-11T14:40:51.100Z",
+    "id": "i60-W2eZN"
+  },
+  {
+    "_id": "KChUe9Y_d",
+    "name": "procedural circuit diagram V1",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f929f4efd2a9642aa9cb78",
+          "67f929f4efd2a9642aa9cb79",
+          "67f929f4efd2a9642aa9cb7a"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f929f4efd2a9642aa9cb77",
+        "createdAt": "2025-04-11T14:59:44.792Z",
+        "updatedAt": "2025-04-11T14:59:44.792Z",
+        "id": "67f929f4efd2a9642aa9cb77"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Function to save a high-resolution version of the canvas\nfunction saveHighResolution() {\n  // Create a high-resolution off-screen canvas\n  let highResCnv = createGraphics(width * highResScale, height * highResScale);\n  \n  // Set up the high-res canvas\n  highResCnv.background(240);\n  highResMode = true;\n  \n  // Scale everything up for high resolution\n  highResCnv.scale(highResScale);\n  \n  // Redraw the entire circuit on the high-res canvas\n  // Draw grid and components\n  for (let i = 0; i < cols; i++) {\n    for (let j = 0; j < rows; j++) {\n      let x = i * cellSize;\n      let y = j * cellSize;\n      \n      // Draw walls if they exist\n      highResCnv.stroke(selectedColor);\n      highResCnv.strokeWeight(2);\n      \n      // Draw curved walls on high-res canvas\n      if (grid[i][j].walls[0]) { // Top\n        drawCurvedWallOnCanvas(highResCnv, x, y, x + cellSize, y, 0, grid[i][j].controlPoints.top);\n      }\n      if (grid[i][j].walls[1]) { // Right\n        drawCurvedWallOnCanvas(highResCnv, x + cellSize, y, x + cellSize, y + cellSize, 1, grid[i][j].controlPoints.right);\n      }\n      if (grid[i][j].walls[2]) { // Bottom\n        drawCurvedWallOnCanvas(highResCnv, x, y + cellSize, x + cellSize, y + cellSize, 2, grid[i][j].controlPoints.bottom);\n      }\n//       if (grid[i][j].walls[3]) { // Left\n        // drawCurvedWallOnCanvas(// Procedural Circuit Diagram Generator\n// This sketch creates a randomly generated circuit diagram that resembles a maze\n// with properly connected electronic components\n    }\n  }\n}\n    \n\nlet grid = [];\nlet cellSize = 50;\nlet cols, rows;\nlet components = [];\nlet highResMode = false;\nlet highResScale = 4; // Scale factor for high-resolution export\nlet selectedColor; // Current color for circuit lines\nlet colorPalettes = [\n  // Color palettes (R,G,B)\n  [0, 0, 0],               // Black (Default)\n  [41, 98, 255],           // Electric Blue\n  [255, 89, 94],           // Coral Red\n  [76, 175, 80],           // Circuit Green\n  [156, 39, 176],          // Deep Purple\n  [255, 152, 0],           // Amber\n  [3, 169, 244],           // Light Blue\n  [233, 30, 99],           // Pink\n];\nlet currentPalette = 0;    // Start with black\nlet curveFactor = 0.3;     // How curvy the lines are (0 = straight, 1 = very curvy)\n\n// Circuit components definitions\nconst COMPONENTS = {\n  RESISTOR: 0,\n  CAPACITOR: 1,\n  // INDUCTOR removed\n  DIODE: 3,\n  SWITCH: 4,\n  BATTERY: 5,\n  GROUND: 6,\n  LED: 7,\n  TRANSISTOR: 8,\n  WIRE: 9\n};\n\nfunction setup() {\n  createCanvas(800, 600);\n  cols = floor(width / cellSize);\n  rows = floor(height / cellSize);\n  \n  // Initialize grid\n  for (let i = 0; i < cols; i++) {\n    grid[i] = [];\n    for (let j = 0; j < rows; j++) {\n      grid[i][j] = {\n        visited: false,\n        // Top, right, bottom, left walls\n        walls: [true, true, true, true],\n        // Component type (if any)\n        component: null,\n        // Orientation (0: horizontal, 1: vertical)\n        orientation: Math.random() > 0.5 ? 0 : 1,\n        // Control points for Bezier curves (if artistic mode)\n        controlPoints: {\n          top: { x: 0, y: 0 },\n          right: { x: 0, y: 0 },\n          bottom: { x: 0, y: 0 },\n          left: { x: 0, y: 0 }\n        }\n      };\n    }\n  }\n  \n  // Set initial color\n  selectedColor = colorPalettes[currentPalette];\n  \n  // Generate maze using DFS algorithm\n  generateMaze(0, 0);\n  \n  // Place components\n  placeComponents();\n  \n  // Set random component for testing\n  frameRate(30);\n}\n\nfunction draw() {\n  background(240);\n  \n  // Draw grid and components\n  for (let i = 0; i < cols; i++) {\n    for (let j = 0; j < rows; j++) {\n      let x = i * cellSize;\n      let y = j * cellSize;\n      \n      // Draw walls if they exist\n      stroke(selectedColor);\n      strokeWeight(2);\n      \n      // Draw curved walls instead of straight lines\n      if (grid[i][j].walls[0]) { // Top\n        drawCurvedWall(x, y, x + cellSize, y, 0, grid[i][j].controlPoints.top);\n      }\n      if (grid[i][j].walls[1]) { // Right\n        drawCurvedWall(x + cellSize, y, x + cellSize, y + cellSize, 1, grid[i][j].controlPoints.right);\n      }\n      if (grid[i][j].walls[2]) { // Bottom\n        drawCurvedWall(x, y + cellSize, x + cellSize, y + cellSize, 2, grid[i][j].controlPoints.bottom);\n      }\n      if (grid[i][j].walls[3]) { // Left\n        drawCurvedWall(x, y, x, y + cellSize, 3, grid[i][j].controlPoints.left);\n      }\n      \n      // Draw component if it exists\n      if (grid[i][j].component !== null) {\n        drawComponent(\n          x + cellSize / 2, \n          y + cellSize / 2, \n          grid[i][j].component, \n          grid[i][j].orientation,\n          cellSize * 0.8 // Size of component\n        );\n      }\n    }\n  }\n  \n  // Display instructions\n  fill(0);\n  noStroke();\n  textSize(14);\n  text(\"Press SPACE to generate a new circuit\", 20, height - 60);\n  text(\"Press 'S' to save as high-resolution image\", 20, height - 40);\n  text(\"Press 'C' to cycle through color palettes\", 20, height - 20);\n}\n\n// Function to draw curved walls\nfunction drawCurvedWall(x1, y1, x2, y2, direction, controlPoint) {\n  // If control point is not set (0,0), calculate it\n  if (controlPoint.x === 0 && controlPoint.y === 0) {\n    // Different calculations based on wall direction\n    if (direction === 0 || direction === 2) { // Top or bottom\n      controlPoint.x = (x1 + x2) / 2;\n      // Add some randomness to curve\n      if (direction === 0) { // Top\n        controlPoint.y = y1 - random(cellSize * curveFactor);\n      } else { // Bottom\n        controlPoint.y = y1 + random(cellSize * curveFactor);\n      }\n    } else { // Left or right\n      controlPoint.y = (y1 + y2) / 2;\n      // Add some randomness to curve\n      if (direction === 3) { // Left\n        controlPoint.x = x1 - random(cellSize * curveFactor);\n      } else { // Right\n        controlPoint.x = x1 + random(cellSize * curveFactor);\n      }\n    }\n  }\n  \n  // Draw a quadratic curve\n  noFill();\n  beginShape();\n  vertex(x1, y1);\n  quadraticVertex(controlPoint.x, controlPoint.y, x2, y2);\n  endShape();\n}\n\nfunction keyPressed() {\n  if (keyCode === 32) { // SPACE\n    // Reset grid\n    for (let i = 0; i < cols; i++) {\n      for (let j = 0; j < rows; j++) {\n        grid[i][j] = {\n          visited: false,\n          walls: [true, true, true, true],\n          component: null,\n          orientation: Math.random() > 0.5 ? 0 : 1,\n          // Reset control points\n          controlPoints: {\n            top: { x: 0, y: 0 },\n            right: { x: 0, y: 0 },\n            bottom: { x: 0, y: 0 },\n            left: { x: 0, y: 0 }\n          }\n        };\n      }\n    }\n    \n    // Regenerate maze\n    generateMaze(0, 0);\n    \n    // Replace components\n    placeComponents();\n  }\n  else if (key === 's' || key === 'S') {\n    // Save high-resolution image\n    saveHighResolution();\n  }\n  else if (key === 'c' || key === 'C') {\n    // Cycle through color palettes\n    currentPalette = (currentPalette + 1) % colorPalettes.length;\n    selectedColor = colorPalettes[currentPalette];\n  }\n}\n\n// DFS maze generation algorithm\nfunction generateMaze(x, y) {\n  grid[x][y].visited = true;\n  \n  // Define directions: top, right, bottom, left\n  const directions = [\n    [0, -1],\n    [1, 0],\n    [0, 1],\n    [-1, 0]\n  ];\n  \n  // Shuffle directions for randomness\n  shuffleArray(directions);\n  \n  for (let i = 0; i < directions.length; i++) {\n    let nextX = x + directions[i][0];\n    let nextY = y + directions[i][1];\n    \n    if (nextX >= 0 && nextX < cols && nextY >= 0 && nextY < rows && !grid[nextX][nextY].visited) {\n      // Remove walls between current cell and next cell\n      if (directions[i][0] === 0 && directions[i][1] === -1) { // Top\n        grid[x][y].walls[0] = false;\n        grid[nextX][nextY].walls[2] = false;\n      } else if (directions[i][0] === 1 && directions[i][1] === 0) { // Right\n        grid[x][y].walls[1] = false;\n        grid[nextX][nextY].walls[3] = false;\n      } else if (directions[i][0] === 0 && directions[i][1] === 1) { // Bottom\n        grid[x][y].walls[2] = false;\n        grid[nextX][nextY].walls[0] = false;\n      } else if (directions[i][0] === -1 && directions[i][1] === 0) { // Left\n        grid[x][y].walls[3] = false;\n        grid[nextX][nextY].walls[1] = false;\n      }\n      \n      // Continue recursively\n      generateMaze(nextX, nextY);\n    }\n  }\n}\n\n// Place components throughout the circuit intelligently\nfunction placeComponents() {\n  // Start with a battery\n  let batteryX = floor(random(cols));\n  let batteryY = floor(random(rows));\n  grid[batteryX][batteryY].component = COMPONENTS.BATTERY;\n  \n  // Add ground somewhere\n  let groundX, groundY;\n  do {\n    groundX = floor(random(cols));\n    groundY = floor(random(rows));\n  } while (groundX === batteryX && groundY === batteryY);\n  \n  grid[groundX][groundY].component = COMPONENTS.GROUND;\n  \n  // Place other components in empty spots\n  const componentCount = floor(cols * rows * 0.3); // Fill about 30% with components\n  \n  for (let i = 0; i < componentCount; i++) {\n    let x, y;\n    do {\n      x = floor(random(cols));\n      y = floor(random(rows));\n    } while (grid[x][y].component !== null);\n    \n    // Check if this cell has at least one open wall (for connectivity)\n    if (!grid[x][y].walls[0] || !grid[x][y].walls[1] || \n        !grid[x][y].walls[2] || !grid[x][y].walls[3]) {\n      \n      // Determine orientation based on which walls are open\n      if (!grid[x][y].walls[0] && !grid[x][y].walls[2]) {\n        grid[x][y].orientation = 1; // Vertical\n      } else if (!grid[x][y].walls[1] && !grid[x][y].walls[3]) {\n        grid[x][y].orientation = 0; // Horizontal\n      }\n      \n      // Random component (except battery, ground, and inductor which we removed)\n      const componentOptions = [\n        COMPONENTS.RESISTOR, \n        COMPONENTS.CAPACITOR,\n        COMPONENTS.DIODE,\n        COMPONENTS.SWITCH,\n        COMPONENTS.LED,\n        COMPONENTS.TRANSISTOR,\n        COMPONENTS.WIRE\n      ];\n      grid[x][y].component = random(componentOptions);\n    }\n  }\n}\n\n// Draw electronic component at specified position with given orientation\nfunction drawComponent(x, y, type, orientation, size) {\n  push();\n  translate(x, y);\n  if (orientation === 1) {\n    rotate(HALF_PI); // Rotate for vertical orientation\n  }\n  \n  stroke(selectedColor);\n  strokeWeight(1.5);\n  \n  const halfSize = size / 2;\n  \n  switch (type) {\n    case COMPONENTS.RESISTOR:\n      // Resistor zigzag symbol\n      line(-halfSize, 0, -halfSize/2, 0);\n      beginShape();\n      vertex(-halfSize/2, 0);\n      vertex(-halfSize/3, -size/6);\n      vertex(-halfSize/6, size/6);\n      vertex(0, -size/6);\n      vertex(halfSize/6, size/6);\n      vertex(halfSize/3, -size/6);\n      vertex(halfSize/2, 0);\n      endShape();\n      line(halfSize/2, 0, halfSize, 0);\n      break;\n      \n    case COMPONENTS.CAPACITOR:\n      // Capacitor symbol\n      line(-halfSize, 0, -size/8, 0);\n      line(halfSize, 0, size/8, 0);\n      line(-size/8, -size/4, -size/8, size/4);\n      line(size/8, -size/4, size/8, size/4);\n      break;\n      \n    case COMPONENTS.DIODE:\n      // Diode symbol\n      line(-halfSize, 0, -size/6, 0);\n      line(halfSize, 0, size/6, 0);\n      beginShape();\n      vertex(-size/6, -size/6);\n      vertex(size/6, 0);\n      vertex(-size/6, size/6);\n      vertex(-size/6, -size/6);\n      endShape(CLOSE);\n      line(size/6, -size/6, size/6, size/6);\n      break;\n      \n    case COMPONENTS.SWITCH:\n      // Switch symbol\n      line(-halfSize, 0, -size/6, 0);\n      line(size/6, 0, halfSize, 0);\n      line(-size/6, 0, size/6, -size/5);\n      fill(255);\n      ellipse(-size/6, 0, size/10);\n      ellipse(size/6, 0, size/10);\n      break;\n      \n    case COMPONENTS.BATTERY:\n      // Battery symbol\n      line(-halfSize, 0, -size/6, 0);\n      line(size/6, 0, halfSize, 0);\n      line(-size/6, -size/5, -size/6, size/5);\n      line(-size/12, -size/3, -size/12, size/3);\n      line(size/6, -size/6, size/6, size/6);\n      break;\n      \n    case COMPONENTS.GROUND:\n      // Ground symbol\n      line(-size/16, 0, size/16, 0);\n      line(0, 0, 0, size/6);\n      line(-size/5, size/6, size/5, size/6);\n      line(-size/6, size/4, size/6, size/4);\n      line(-size/8, size/3, size/8, size/3);\n      break;\n      \n    case COMPONENTS.LED:\n      // LED symbol (diode with arrows)\n      line(-halfSize, 0, -size/6, 0);\n      line(halfSize, 0, size/6, 0);\n      beginShape();\n      vertex(-size/6, -size/6);\n      vertex(size/6, 0);\n      vertex(-size/6, size/6);\n      vertex(-size/6, -size/6);\n      endShape(CLOSE);\n      line(size/6, -size/6, size/6, size/6);\n      \n      // Light rays\n      line(size/5, -size/5, size/3, -size/3);\n      line(size/3, -size/5, size/3, -size/3);\n      line(size/5, -size/3, size/3, -size/3);\n      \n      line(size/5, size/5, size/3, size/3);\n      line(size/3, size/5, size/3, size/3);\n      line(size/5, size/3, size/3, size/3);\n      break;\n      \n    case COMPONENTS.TRANSISTOR:\n      // Transistor symbol (NPN)\n      line(-halfSize, 0, -size/6, 0);\n      line(-size/6, -size/3, -size/6, size/3);\n      line(-size/6, -size/6, size/6, -size/3);\n      line(-size/6, size/6, size/6, size/3);\n      line(size/6, -size/3, size/6, -halfSize);\n      line(size/6, size/3, size/6, halfSize);\n      \n      // Base\n      line(-size/6, 0, size/12, 0);\n      break;\n      \n    case COMPONENTS.WIRE:\n      // Simple wire/connection - make it slightly curved for artistic effect\n      noFill();\n      beginShape();\n      vertex(-halfSize, 0);\n      quadraticVertex(0, random(-size/6, size/6), halfSize, 0);\n      endShape();\n      break;\n  }\n  \n  pop();\n}\n\n// Utility function to shuffle array in place\nfunction shuffleArray(array) {\n  for (let i = array.length - 1; i > 0; i--) {\n    const j = Math.floor(Math.random() * (i + 1));\n    [array[i], array[j]] = [array[j], array[i]];\n  }\n  return array;\n}\n\n// Function to save a high-resolution version of the canvas\nfunction saveHighResolution() {\n  // Create a high-resolution off-screen canvas\n  let highResCnv = createGraphics(width * highResScale, height * highResScale);\n  \n  // Set up the high-res canvas\n  highResCnv.background(240);\n  highResMode = true;\n  \n  // Scale everything up for high resolution\n  highResCnv.scale(highResScale);\n  \n  // Redraw the entire circuit on the high-res canvas\n  // Draw grid and components\n  for (let i = 0; i < cols; i++) {\n    for (let j = 0; j < rows; j++) {\n      let x = i * cellSize;\n      let y = j * cellSize;\n      \n      // Draw walls if they exist\n      highResCnv.stroke(0);\n      highResCnv.strokeWeight(2);\n      \n      if (grid[i][j].walls[0]) highResCnv.line(x, y, x + cellSize, y); // Top\n      if (grid[i][j].walls[1]) highResCnv.line(x + cellSize, y, x + cellSize, y + cellSize); // Right\n      if (grid[i][j].walls[2]) highResCnv.line(x, y + cellSize, x + cellSize, y + cellSize); // Bottom\n      if (grid[i][j].walls[3]) highResCnv.line(x, y, x, y + cellSize); // Left\n      \n      // Draw component if it exists\n      if (grid[i][j].component !== null) {\n        drawComponentOnCanvas(\n          highResCnv,\n          x + cellSize / 2, \n          y + cellSize / 2, \n          grid[i][j].component, \n          grid[i][j].orientation,\n          cellSize * 0.8 // Size of component\n        );\n      }\n    }\n  }\n  \n  // Save the high-res image\n  highResCnv.save('circuit-diagram-' + Date.now() + '.png');\n  \n  // Clean up\n  highResMode = false;\n  highResCnv.remove();\n}\n\n// Modified version of drawComponent that can draw on a specified canvas\nfunction drawComponentOnCanvas(canvas, x, y, type, orientation, size) {\n  canvas.push();\n  canvas.translate(x, y);\n  if (orientation === 1) {\n    canvas.rotate(HALF_PI); // Rotate for vertical orientation\n  }\n  \n  canvas.stroke(0);\n  canvas.strokeWeight(1.5);\n  \n  const halfSize = size / 2;\n  \n  switch (type) {\n    case COMPONENTS.RESISTOR:\n      // Resistor zigzag symbol\n      canvas.line(-halfSize, 0, -halfSize/2, 0);\n      canvas.beginShape();\n      canvas.vertex(-halfSize/2, 0);\n      canvas.vertex(-halfSize/3, -size/6);\n      canvas.vertex(-halfSize/6, size/6);\n      canvas.vertex(0, -size/6);\n      canvas.vertex(halfSize/6, size/6);\n      canvas.vertex(halfSize/3, -size/6);\n      canvas.vertex(halfSize/2, 0);\n      canvas.endShape();\n      canvas.line(halfSize/2, 0, halfSize, 0);\n      break;\n      \n    case COMPONENTS.CAPACITOR:\n      // Capacitor symbol\n      canvas.line(-halfSize, 0, -size/8, 0);\n      canvas.line(halfSize, 0, size/8, 0);\n      canvas.line(-size/8, -size/4, -size/8, size/4);\n      canvas.line(size/8, -size/4, size/8, size/4);\n      break;\n      \n    case COMPONENTS.INDUCTOR:\n      // Inductor/coil symbol\n      canvas.line(-halfSize, 0, -size/3, 0);\n      canvas.arc(-size/6, 0, size/6, size/3, -HALF_PI, PI+HALF_PI);\n      canvas.arc(0, 0, size/6, size/3, -HALF_PI, PI+HALF_PI);\n      canvas.arc(size/6, 0, size/6, size/3, -HALF_PI, PI+HALF_PI);\n      canvas.line(size/3, 0, halfSize, 0);\n      break;\n      \n    case COMPONENTS.DIODE:\n      // Diode symbol\n      canvas.line(-halfSize, 0, -size/6, 0);\n      canvas.line(halfSize, 0, size/6, 0);\n      canvas.beginShape();\n      canvas.vertex(-size/6, -size/6);\n      canvas.vertex(size/6, 0);\n      canvas.vertex(-size/6, size/6);\n      canvas.vertex(-size/6, -size/6);\n      canvas.endShape(CLOSE);\n      canvas.line(size/6, -size/6, size/6, size/6);\n      break;\n      \n    case COMPONENTS.SWITCH:\n      // Switch symbol\n      canvas.line(-halfSize, 0, -size/6, 0);\n      canvas.line(size/6, 0, halfSize, 0);\n      canvas.line(-size/6, 0, size/6, -size/5);\n      canvas.fill(255);\n      canvas.ellipse(-size/6, 0, size/10);\n      canvas.ellipse(size/6, 0, size/10);\n      break;\n      \n    case COMPONENTS.BATTERY:\n      // Battery symbol\n      canvas.line(-halfSize, 0, -size/6, 0);\n      canvas.line(size/6, 0, halfSize, 0);\n      canvas.line(-size/6, -size/5, -size/6, size/5);\n      canvas.line(-size/12, -size/3, -size/12, size/3);\n      canvas.line(size/6, -size/6, size/6, size/6);\n      break;\n      \n    case COMPONENTS.GROUND:\n      // Ground symbol\n      canvas.line(-size/16, 0, size/16, 0);\n      canvas.line(0, 0, 0, size/6);\n      canvas.line(-size/5, size/6, size/5, size/6);\n      canvas.line(-size/6, size/4, size/6, size/4);\n      canvas.line(-size/8, size/3, size/8, size/3);\n      break;\n      \n    case COMPONENTS.LED:\n      // LED symbol (diode with arrows)\n      canvas.line(-halfSize, 0, -size/6, 0);\n      canvas.line(halfSize, 0, size/6, 0);\n      canvas.beginShape();\n      canvas.vertex(-size/6, -size/6);\n      canvas.vertex(size/6, 0);\n      canvas.vertex(-size/6, size/6);\n      canvas.vertex(-size/6, -size/6);\n      canvas.endShape(CLOSE);\n      canvas.line(size/6, -size/6, size/6, size/6);\n      \n      // Light rays\n      canvas.line(size/5, -size/5, size/3, -size/3);\n      canvas.line(size/3, -size/5, size/3, -size/3);\n      canvas.line(size/5, -size/3, size/3, -size/3);\n      \n      canvas.line(size/5, size/5, size/3, size/3);\n      canvas.line(size/3, size/5, size/3, size/3);\n      canvas.line(size/5, size/3, size/3, size/3);\n      break;\n      \n    case COMPONENTS.TRANSISTOR:\n      // Transistor symbol (NPN)\n      canvas.line(-halfSize, 0, -size/6, 0);\n      canvas.line(-size/6, -size/3, -size/6, size/3);\n      canvas.line(-size/6, -size/6, size/6, -size/3);\n      canvas.line(-size/6, size/6, size/6, size/3);\n      canvas.line(size/6, -size/3, size/6, -halfSize);\n      canvas.line(size/6, size/3, size/6, halfSize);\n      \n      // Base\n      canvas.line(-size/6, 0, size/12, 0);\n      break;\n      \n    case COMPONENTS.WIRE:\n      // Simple wire/connection\n      canvas.line(-halfSize, 0, halfSize, 0);\n      break;\n  }\n  \n  canvas.pop();\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f929f4efd2a9642aa9cb79",
+        "createdAt": "2025-04-11T14:59:44.792Z",
+        "updatedAt": "2025-04-11T14:59:44.792Z",
+        "id": "67f929f4efd2a9642aa9cb79"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f929f4efd2a9642aa9cb78",
+        "createdAt": "2025-04-11T14:59:44.792Z",
+        "updatedAt": "2025-04-11T14:59:44.792Z",
+        "id": "67f929f4efd2a9642aa9cb78"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f929f4efd2a9642aa9cb7a",
+        "createdAt": "2025-04-11T14:59:44.792Z",
+        "updatedAt": "2025-04-11T14:59:44.792Z",
+        "id": "67f929f4efd2a9642aa9cb7a"
+      }
+    ],
+    "createdAt": "2025-04-11T14:40:52.271Z",
+    "updatedAt": "2025-04-11T14:59:44.792Z",
+    "id": "KChUe9Y_d"
+  },
+  {
     "_id": "b6iq4hNfK",
     "name": "projectionMapClothes",
     "files": [
@@ -25330,6 +25581,182 @@
     "id": "4T5bR-toe"
   },
   {
+    "_id": "jmX_VCR_v",
+    "name": "Semantic Search - Guccione.com Text Search V0",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f42df259f647cf4de7376c",
+          "67f42df259f647cf4de7376d",
+          "67f42df259f647cf4de7376e",
+          "67f42df259f647cf4de7376f"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f42df259f647cf4de7376b",
+        "createdAt": "2025-04-07T19:56:48.640Z",
+        "updatedAt": "2025-04-07T19:56:48.640Z",
+        "id": "67f42df259f647cf4de7376b"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// ML for Creative Coding\n// https://github.com/shiffman/ML-for-Creative-Coding\n\n// Store answers and their embeddings\nlet answers = [];\nlet answerEmbeddings = [];\nlet questionInput;\nlet askButton;\nlet resultsDiv;\nlet statusDiv;\nlet isModelLoaded = false;\n\nlet extractor;\n\n// Function to load transformers.js dynamically\nasync function loadTransformers() {\n  console.log(\"Loading transformers.js...\");\n  const module = await import(\n    \"https://cdn.jsdelivr.net/npm/@huggingface/transformers\"\n  );\n  const { pipeline } = module;\n  console.log(\"Transformers.js loaded successfully.\");\n  return pipeline;\n}\n\nasync function setup() {\n  noCanvas();\n\n  // Create UI elements\n  statusDiv = createP(\"Loading answers...\");\n\n  questionInput = createInput(\"Who painted the Mona Lisa?\");\n  questionInput.attribute(\"placeholder\", \"Ask a question\");\n  questionInput.size(300);\n\n  askButton = createButton(\"Ask\");\n  askButton.mousePressed(processQuestion);\n\n  resultsDiv = createDiv(\"\");\n\n  // Load answers from file\n  answers = await loadAnswers();\n\n  statusDiv.html(\n    `Loaded ${answers.length} answers. Loading embedding model...`\n  );\n\n  let pipeline = await loadTransformers();\n  extractor = await pipeline(\"feature-extraction\", \"Xenova/all-MiniLM-L6-v2\");\n\n  statusDiv.html(\"Calculating embeddings...\");\n\n  // Calculate embeddings for all answers\n  answerEmbeddings = await getEmbeddings(answers);\n\n  statusDiv.html(\"Ready! Ask a question.\");\n}\n\n// Function to get embeddings for a list of texts\nasync function getEmbeddings(texts) {\n  // Store embeddings for each text\n  let embeddings = [];\n  for (let text of texts) {\n    let output = await extractor(text, { pooling: \"mean\", normalize: true });\n    embeddings.push(output.data);\n  }\n  console.log(embeddings);\n  return embeddings;\n}\n\n// Load answers from a text file\nasync function loadAnswers() {\n  try {\n    const response = await fetch(\"answers.txt\");\n    if (!response.ok) {\n      throw new Error(\"Failed to load answers.txt\");\n    }\n    const text = await response.text();\n\n    // Split the text file by lines and filter out empty lines\n    const lines = text\n      .split(\"\\n\")\n      .map((line) => line.trim())\n      .filter((line) => line.length > 0);\n    return lines;\n  } catch (error) {\n    console.error(\"Error loading answers:\", error);\n    statusDiv.html(\"Error loading answers file. Check console for details.\");\n    return [];\n  }\n}\n\n// Calculate cosine similarity between two embedding vectors\nfunction cosineSimilarity(vecA, vecB) {\n  return dotProduct(vecA, vecB) / (magnitude(vecA) * magnitude(vecB));\n}\n\n// Function to calculate dot product of two vectors\nfunction dotProduct(vecA, vecB) {\n  return vecA.reduce((sum, val, i) => sum + val * vecB[i], 0);\n}\n\n// Function to calculate the magnitude of a vector\nfunction magnitude(vec) {\n  return Math.sqrt(vec.reduce((sum, val) => sum + val * val, 0));\n}\n\n// Process a user question\nasync function processQuestion() {\n  const question = questionInput.value().trim();\n  if (question.length === 0) return;\n  statusDiv.html(\"Processing question...\");\n\n  // Get embedding for the question\n  let questionEmbedding = await getEmbeddings([question]);\n\n  // Calculate similarity scores with all answers\n  let similarities = [];\n  for (let i = 0; i < answers.length; i++) {\n    let score = cosineSimilarity(questionEmbedding[0], answerEmbeddings[i]);\n    similarities.push({\n      answer: answers[i],\n      score: score,\n    });\n  }\n\n  // Sort by similarity (highest first)\n  similarities.sort((a, b) => b.score - a.score);\n\n  // Display results\n  let resultsHTML = \"\";\n\n  for (let i = 0; i < 5; i++) {\n    const result = similarities[i];\n    resultsHTML += `\n      <p>\n        <strong>${result.answer}</strong><br>\n        <em>Similarity: ${result.score.toFixed(4)}</em>\n      </p>\n    `;\n  }\n\n  resultsDiv.html(resultsHTML);\n  statusDiv.html(\"Ready for next question\");\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f42df259f647cf4de7376e",
+        "createdAt": "2025-04-07T19:56:48.640Z",
+        "updatedAt": "2025-04-07T19:56:48.640Z",
+        "id": "67f42df259f647cf4de7376e"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <!--     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js\"></script> -->\n    <script src=\"https://cdn.jsdelivr.net/npm/p5@2.0.0-beta.4/lib/p5.js\"></script>\n    <script src=\"umap-js.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n    <meta charset=\"utf-8\" />\n  </head>\n  <body>\n    <main></main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42df259f647cf4de7376d",
+        "createdAt": "2025-04-07T19:56:48.640Z",
+        "updatedAt": "2025-04-07T19:56:48.640Z",
+        "id": "67f42df259f647cf4de7376d"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  background-color:#FFF;\n\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42df259f647cf4de7376f",
+        "createdAt": "2025-04-07T19:56:48.640Z",
+        "updatedAt": "2025-04-07T19:56:48.640Z",
+        "id": "67f42df259f647cf4de7376f"
+      },
+      {
+        "name": "answers.txt",
+        "content": "The sky is blue because of Rayleigh scattering of sunlight in the atmosphere.\nAn apple is a sweet fruit that typically has red, yellow, or green skin.\nNew York City is the most populous city in the United States.\nParis is the capital and largest city of France.\nThe Great Wall of China is over 13,000 miles long.\nJavaScript is a programming language commonly used for web development.\nMachine learning is a subset of artificial intelligence that enables computers to learn from data.\nWater boils at 100 degrees Celsius at standard atmospheric pressure.\nThe Earth orbits around the Sun once every 365.25 days.\nThe theory of relativity was developed by Albert Einstein.\nPython is a high-level programming language known for its readability.\nThe human body has 206 bones.\nVector embeddings represent words or concepts as points in a multi-dimensional space.\nTransformers are a type of neural network architecture used in natural language processing.\nThe first computer programmer was Ada Lovelace.\nClimate change refers to long-term shifts in temperature and weather patterns.\nDNA stands for deoxyribonucleic acid and contains genetic instructions.\nDemocracy is a system of government where power is vested in the people.\nThe Mona Lisa was painted by Leonardo da Vinci.\nPhotosynthesis is the process by which plants convert light energy into chemical energy.",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42df259f647cf4de7376c",
+        "createdAt": "2025-04-07T19:56:48.640Z",
+        "updatedAt": "2025-04-07T19:56:48.640Z",
+        "id": "67f42df259f647cf4de7376c"
+      }
+    ],
+    "createdAt": "2025-04-07T19:56:34.512Z",
+    "updatedAt": "2025-04-07T19:56:48.640Z",
+    "id": "jmX_VCR_v"
+  },
+  {
+    "_id": "XDgg7hVTf",
+    "name": "Semantic Search - Guccione.com Text Search V1",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f42e3f59f647cf4de73771",
+          "67f42ef69b5d62b862d0d82d",
+          "67f42ea1760287aa669b49e8",
+          "67f42e3f59f647cf4de73772",
+          "67f42f2e210a60aa5f634c1c",
+          "67f42e3f59f647cf4de73773",
+          "67f42e3f59f647cf4de73774"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f42e3f59f647cf4de73770",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42e3f59f647cf4de73770"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// ML for Creative Coding\n// https://github.com/shiffman/ML-for-Creative-Coding\n\n// Store answers and their embeddings\nlet answers = [];\nlet answerEmbeddings = [];\nlet questionInput;\nlet askButton;\nlet resultsDiv;\nlet statusDiv;\nlet isModelLoaded = false;\n\nlet extractor;\n\n// Function to load transformers.js dynamically\nasync function loadTransformers() {\n  console.log(\"Loading transformers.js...\");\n  const module = await import(\n    \"https://cdn.jsdelivr.net/npm/@huggingface/transformers\"\n  );\n  const { pipeline } = module;\n  console.log(\"Transformers.js loaded successfully.\");\n  return pipeline;\n}\n\nasync function setup() {\n  noCanvas();\n\n  // Create UI elements\n  statusDiv = createP(\"Loading answers...\");\n\n  questionInput = createInput(\"\");\n  questionInput.attribute(\"placeholder\", \"Search\");\n  questionInput.size(300);\n\n  askButton = createButton(\"Ask\");\n  askButton.mousePressed(processQuestion);\n\n  resultsDiv = createDiv(\"\");\n\n  // Load answers from file\n  answers = await loadAnswers();\n\n  statusDiv.html(\n    `Loaded ${answers.length} answers. Loading embedding model...`\n  );\n\n  let pipeline = await loadTransformers();\n  extractor = await pipeline(\"feature-extraction\", \"Xenova/all-MiniLM-L6-v2\");\n\n  statusDiv.html(\"Calculating embeddings...\");\n\n  // Calculate embeddings for all answers\n  answerEmbeddings = await getEmbeddings(answers);\n\n  statusDiv.html(\"Search in chats.\");\n}\n\n// Function to get embeddings for a list of texts\nasync function getEmbeddings(texts) {\n  // Store embeddings for each text\n  let embeddings = [];\n  for (let text of texts) {\n    let output = await extractor(text, { pooling: \"mean\", normalize: true });\n    embeddings.push(output.data);\n  }\n  console.log(embeddings);\n  return embeddings;\n}\n\n// Load answers from a text file\nasync function loadAnswers() {\n  try {\n    const response = await fetch(\"nasif_chat.txt\");\n    if (!response.ok) {\n      throw new Error(\"Failed to load answers.txt\");\n    }\n    const text = await response.text();\n\n    // Split the text file by lines and filter out empty lines\n    const lines = text\n      .split(\"\\n\")\n      .map((line) => line.trim())\n      .filter((line) => line.length > 0);\n    return lines;\n  } catch (error) {\n    console.error(\"Error loading answers:\", error);\n    statusDiv.html(\"Error loading answers file. Check console for details.\");\n    return [];\n  }\n}\n\n// Calculate cosine similarity between two embedding vectors\nfunction cosineSimilarity(vecA, vecB) {\n  return dotProduct(vecA, vecB) / (magnitude(vecA) * magnitude(vecB));\n}\n\n// Function to calculate dot product of two vectors\nfunction dotProduct(vecA, vecB) {\n  return vecA.reduce((sum, val, i) => sum + val * vecB[i], 0);\n}\n\n// Function to calculate the magnitude of a vector\nfunction magnitude(vec) {\n  return Math.sqrt(vec.reduce((sum, val) => sum + val * val, 0));\n}\n\n// Process a user question\nasync function processQuestion() {\n  const question = questionInput.value().trim();\n  if (question.length === 0) return;\n  statusDiv.html(\"Processing question...\");\n\n  // Get embedding for the question\n  let questionEmbedding = await getEmbeddings([question]);\n\n  // Calculate similarity scores with all answers\n  let similarities = [];\n  for (let i = 0; i < answers.length; i++) {\n    let score = cosineSimilarity(questionEmbedding[0], answerEmbeddings[i]);\n    similarities.push({\n      answer: answers[i],\n      score: score,\n    });\n  }\n\n  // Sort by similarity (highest first)\n  similarities.sort((a, b) => b.score - a.score);\n\n  // Display results\n  let resultsHTML = \"\";\n\n  for (let i = 0; i < 5; i++) {\n    const result = similarities[i];\n    resultsHTML += `\n      <p>\n        <strong>${result.answer}</strong><br>\n        <em>Similarity: ${result.score.toFixed(4)}</em>\n      </p>\n    `;\n  }\n\n  resultsDiv.html(resultsHTML);\n  statusDiv.html(\"Ready for next question\");\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42e3f59f647cf4de73773",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42e3f59f647cf4de73773"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <!--     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js\"></script> -->\n    <script src=\"https://cdn.jsdelivr.net/npm/p5@2.0.0-beta.4/lib/p5.js\"></script>\n    <script src=\"umap-js.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n    <meta charset=\"utf-8\" />\n  </head>\n  <body>\n    <main></main>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42e3f59f647cf4de73772",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42e3f59f647cf4de73772"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  background-color:#FFF;\n\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42e3f59f647cf4de73774",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42e3f59f647cf4de73774"
+      },
+      {
+        "name": "answers.txt",
+        "content": "The sky is blue because of Rayleigh scattering of sunlight in the atmosphere.\nAn apple is a sweet fruit that typically has red, yellow, or green skin.\nNew York City is the most populous city in the United States.\nParis is the capital and largest city of France.\nThe Great Wall of China is over 13,000 miles long.\nJavaScript is a programming language commonly used for web development.\nMachine learning is a subset of artificial intelligence that enables computers to learn from data.\nWater boils at 100 degrees Celsius at standard atmospheric pressure.\nThe Earth orbits around the Sun once every 365.25 days.\nThe theory of relativity was developed by Albert Einstein.\nPython is a high-level programming language known for its readability.\nThe human body has 206 bones.\nVector embeddings represent words or concepts as points in a multi-dimensional space.\nTransformers are a type of neural network architecture used in natural language processing.\nThe first computer programmer was Ada Lovelace.\nClimate change refers to long-term shifts in temperature and weather patterns.\nDNA stands for deoxyribonucleic acid and contains genetic instructions.\nDemocracy is a system of government where power is vested in the people.\nThe Mona Lisa was painted by Leonardo da Vinci.\nPhotosynthesis is the process by which plants convert light energy into chemical energy.",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42e3f59f647cf4de73771",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42e3f59f647cf4de73771"
+      },
+      {
+        "name": "famiglina_chat.txt",
+        "content": "",
+        "url": "https://assets.editor.p5js.org/65cbf2cc964924001a988c17/9f481d02-6255-4468-b046-a36491ec8dd8.txt",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42ea1760287aa669b49e8",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42ea1760287aa669b49e8"
+      },
+      {
+        "name": "famiglina_chat.txt",
+        "content": "",
+        "url": "https://assets.editor.p5js.org/65cbf2cc964924001a988c17/8843dcaa-4286-4afd-a648-da9fcc44752c.txt",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f42ef69b5d62b862d0d82d",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42ef69b5d62b862d0d82d"
+      },
+      {
+        "name": "nasif_chat.txt",
+        "content": "Nasif: Fabriiii its Nasif\nNasif: Could you fill this when2meet so we can figure out what time to work on gerp today?\nFabri: Ofc!\nNasif: We’re here at room 404!\nNasif: Thats crazy\nNasif: Hes the dean of tandon\nFabri: OH my bad youre right!\nNasif: Its gonna be good\nNasif: R u going?\nFabri: yes! ill be there right after this class\nFabri: maybe nico will come too im trying to convince him\nNasif: Tell him he has to\nFabri: confirmed hes coming!\nNasif: http://www.mundopoesia.com/foros/temas/amo-la-primavera-soneto-bilinguee-espanol-italiano.648136/\nNasif: Yessss\nFabri: Merry Saturday! Where may I find that mini usb cable we had used for the ftdi?\nNasif: Heyy\nNasif: I gave it to Niko when class ended!\nNasif: Did he give it back to the ER?\nFabri: Lmao no I’m banned now 💀\nNasif: Omg whattttttt\nNasif: Im sorryyyy\nNasif: Ill text niko rn\nNasif: Niko told me he returned it\nNasif: They must have not put it in\nFabri: Hahaha it’s all good I should’ve asked him sooner\nFabri: Fuuuuck\nFabri: Isn’t this what happened to you?\nFabri: Ph no right sky\nFabri: Sky had the same thing happen smh\nNasif: Its happened ti everyone at least once\nNasif: ER is broken\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f42f2e210a60aa5f634c1c",
+        "createdAt": "2025-04-11T12:04:08.545Z",
+        "updatedAt": "2025-04-11T12:04:08.545Z",
+        "id": "67f42f2e210a60aa5f634c1c"
+      }
+    ],
+    "createdAt": "2025-04-07T19:57:51.372Z",
+    "updatedAt": "2025-04-11T12:04:08.545Z",
+    "id": "XDgg7hVTf"
+  },
+  {
     "_id": "vCOpT5uTI",
     "name": "serial comm simplified TEMPLATE",
     "files": [
@@ -25813,6 +26240,168 @@
     "createdAt": "2024-10-28T23:59:54.509Z",
     "updatedAt": "2024-10-29T00:13:03.580Z",
     "id": "pXoEtqUqy"
+  },
+  {
+    "_id": "aDC4s6UBQ",
+    "name": "Simple Image Semantic Search - Guccione.com Image Search V0",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f450ac5ac40dcb5ce56da8",
+          "67f450ac5ac40dcb5ce56da9",
+          "67f450ac5ac40dcb5ce56daa",
+          "67f450ac5ac40dcb5ce56dab",
+          "67f450ac5ac40dcb5ce56dac"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f450ac5ac40dcb5ce56da7",
+        "createdAt": "2025-04-07T22:24:56.749Z",
+        "updatedAt": "2025-04-07T22:24:56.749Z",
+        "id": "67f450ac5ac40dcb5ce56da7"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Machine Learning for Creative Coding\n// https://github.com/shiffman/ML-for-Creative-Coding\n\n// List of all images\nlet imageList;\n\n// All image embeddings\nlet imageEmbeddings = [];\n\n// Interface\nlet textInput, searchButton, resultsDiv;\n\nasync function setup() {\n\n  createCanvas(310, 40);\n  background(220);\n  \n  // Load list of images\n  let rawjson = await loadJSON(\"images.json\");\n  imageList = rawjson.images;\n  \n  // Text input\n  textInput = createInput(\"cat\");\n  textInput.size(300);\n  searchButton = createButton(\"Search\");\n  searchButton.mousePressed(searchImages);\n  \n  // Results\n  resultsDiv = createDiv('');\n\n  // Load models and compute embeddings\n  await loadModels();\n  await computeEmbeddings();\n  \n  // Update Canvas\n  updateCanvas(\"Ready!\");\n}\n\n\n// Embeddings for all images\nasync function computeEmbeddings() {\n  for (let i = 0; i < imageList.length; i++) {\n    const { id, url } = imageList[i];\n    updateCanvas(`Processing image ${i + 1}/${imageList.length}`);\n    const embedding = await computeImageEmbedding(url);\n    imageEmbeddings.push({ id, url, embedding });\n  }\n}\n\n// Image Similirity\nasync function searchImages() {\n  resultsDiv.html('');\n\n  // Get query text\n  let query = \"photo of \" + textInput.value().trim();\n  updateCanvas(`Searching for: ${query}`);\n  \n  // Get text embedding\n  let textEmbedding = await computeTextEmbedding(query);\n\n  // Calculate similarities\n  let similarities = [];\n  for (const item of imageEmbeddings) {\n    const similarity = tfjs.cos_sim(textEmbedding, item.embedding);\n    similarities.push({ item, similarity });\n  }\n\n  // Sort by similarity\n  similarities.sort((a, b) => b.similarity - a.similarity);\n\n  // Display results\n  for (const result of similarities) {\n    const resultDiv = createDiv();\n    resultDiv.style(\"display\", \"inline-block\");\n    resultDiv.style(\"margin\", \"10px\");\n    const img = createImg(result.item.url, result.item.id);\n    img.parent(resultDiv);\n    img.size(100, 100);\n    const scoreP = createP(`${result.similarity.toFixed(2)}`);\n    scoreP.parent(resultDiv);\n    resultDiv.parent(resultsDiv);\n  }\n  updateCanvas(\"Ready!\");\n}\n\n// Log model loading\nfunction logProgress(progress) {\n  if (progress.status === \"progress\") {\n    updateCanvas(`Loading models: ${progress.progress.toFixed(0)}%`);\n  }\n}\n\n// Update text\nfunction updateCanvas(statusText) {\n  background(220);\n  textSize(16);\n  textAlign(CENTER,CENTER);\n  fill(0);\n  text(statusText, width / 2, height / 2);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f450ac5ac40dcb5ce56daa",
+        "createdAt": "2025-04-07T22:24:56.749Z",
+        "updatedAt": "2025-04-07T22:24:56.749Z",
+        "id": "67f450ac5ac40dcb5ce56daa"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <!--     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js\"></script> -->\n    <script src=\"https://cdn.jsdelivr.net/npm/p5@2.0.0-beta.4/lib/p5.js\"></script>\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n    <meta charset=\"utf-8\" />\n  </head>\n  <body>\n    <main></main>\n    <script src=\"tf-helper.js\"></script>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ac5ac40dcb5ce56da9",
+        "createdAt": "2025-04-07T22:24:56.749Z",
+        "updatedAt": "2025-04-07T22:24:56.749Z",
+        "id": "67f450ac5ac40dcb5ce56da9"
+      },
+      {
+        "name": "style.css",
+        "content": "html,\nbody {\n  background-color: #FFF;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ac5ac40dcb5ce56dab",
+        "createdAt": "2025-04-07T22:24:56.749Z",
+        "updatedAt": "2025-04-07T22:24:56.749Z",
+        "id": "67f450ac5ac40dcb5ce56dab"
+      },
+      {
+        "name": "tf-helper.js",
+        "content": "// Global variables\nlet tfjs;\nlet textModel, visionModel, tokenizer, processor, cos_sim;\n\n\n// Load CLIP models\nasync function loadModels() {\n  \n  // Load transformers.js library\n  tfjs = await import(\n    \"https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.4.0\"\n  );\n  \n  // Destructure things we need\n  const {\n    AutoTokenizer,\n    AutoProcessor,\n    CLIPTextModelWithProjection,\n    CLIPVisionModelWithProjection,\n    RawImage,\n  } = tfjs;\n\n  statusText = \"Loading CLIP model...\";\n\n  // Load text model\n  tokenizer = await AutoTokenizer.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\"\n  );\n  textModel = await CLIPTextModelWithProjection.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\",\n    {\n      device: \"webgpu\",\n      dtype: \"fp32\",\n      progress_callback: logProgress,\n    }\n  );\n\n  // Load vision model\n  processor = await AutoProcessor.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\"\n  );\n  visionModel = await CLIPVisionModelWithProjection.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\",\n    {\n      device: \"webgpu\",\n      dtype: \"fp32\",\n      progress_callback: logProgress,\n    }\n  );\n}\n\n// A single image embedding\nasync function computeImageEmbedding(imgURL) {\n  const image = await tfjs.RawImage.read(imgURL);\n  const imageInputs = await processor(image);\n  const { image_embeds } = await visionModel(imageInputs);\n  const embedding = image_embeds.normalize().tolist()[0];\n  return embedding;\n}\n\n// A single text embedding\nasync function computeTextEmbedding(query) {\n  // Compute text embedding\n  const textInputs = tokenizer([query], { padding: true, truncation: true });\n  const { text_embeds } = await textModel(textInputs);\n  const embedding = text_embeds.normalize().tolist()[0];\n  return embedding;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ac5ac40dcb5ce56dac",
+        "createdAt": "2025-04-07T22:24:56.749Z",
+        "updatedAt": "2025-04-07T22:24:56.749Z",
+        "id": "67f450ac5ac40dcb5ce56dac"
+      },
+      {
+        "name": "images.json",
+        "content": "{\n  \"images\": [\n    {\n      \"id\": \"cat\",\n      \"url\": \"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"dog\",\n      \"url\": \"https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"mountain\",\n      \"url\": \"https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"beach\",\n      \"url\": \"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"pizza\",\n      \"url\": \"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"book\",\n      \"url\": \"https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"car\",\n      \"url\": \"https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"flower\",\n      \"url\": \"https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"coffee\",\n      \"url\": \"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"laptop\",\n      \"url\": \"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=512&h=512&fit=crop\"\n    }\n  ]\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ac5ac40dcb5ce56da8",
+        "createdAt": "2025-04-07T22:24:56.749Z",
+        "updatedAt": "2025-04-07T22:24:56.749Z",
+        "id": "67f450ac5ac40dcb5ce56da8"
+      }
+    ],
+    "createdAt": "2025-04-07T22:24:44.616Z",
+    "updatedAt": "2025-04-07T22:24:56.749Z",
+    "id": "aDC4s6UBQ"
+  },
+  {
+    "_id": "1XYsbrfer",
+    "name": "Simple Image Semantic Search - Guccione.com Image Search V1",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f450ba5ac40dcb5ce56dae",
+          "67f450ba5ac40dcb5ce56daf",
+          "67f450ba5ac40dcb5ce56db0",
+          "67f450ba5ac40dcb5ce56db1",
+          "67f450ba5ac40dcb5ce56db2"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f450ba5ac40dcb5ce56dad",
+        "createdAt": "2025-04-07T22:30:58.528Z",
+        "updatedAt": "2025-04-07T22:30:58.528Z",
+        "id": "67f450ba5ac40dcb5ce56dad"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Machine Learning for Creative Coding\n// https://github.com/shiffman/ML-for-Creative-Coding\n\n// List of all images\nlet imageList;\n\n// All image embeddings\nlet imageEmbeddings = [];\n\n// Interface\nlet textInput, searchButton, resultsDiv;\n\nasync function setup() {\n\n  createCanvas(310, 40);\n  background(220);\n  \n  // Load list of images\n  let rawjson = await loadJSON(\"images.json\");\n  imageList = rawjson.images;\n  \n  // Text input\n  textInput = createInput(\"cat\");\n  textInput.size(300);\n  searchButton = createButton(\"Search\");\n  searchButton.mousePressed(searchImages);\n  \n  // Results\n  resultsDiv = createDiv('');\n\n  // Load models and compute embeddings\n  await loadModels();\n  await computeEmbeddings();\n  \n  // Update Canvas\n  updateCanvas(\"Ready!\");\n}\n\n\n// Embeddings for all images\nasync function computeEmbeddings() {\n  for (let i = 0; i < imageList.length; i++) {\n    const { id, url } = imageList[i];\n    updateCanvas(`Processing image ${i + 1}/${imageList.length}`);\n    const embedding = await computeImageEmbedding(url);\n    imageEmbeddings.push({ id, url, embedding });\n  }\n}\n\n// Image Similirity\nasync function searchImages() {\n  resultsDiv.html('');\n\n  // Get query text\n  let query = \"photo of \" + textInput.value().trim();\n  updateCanvas(`Searching for: ${query}`);\n  \n  // Get text embedding\n  let textEmbedding = await computeTextEmbedding(query);\n\n  // Calculate similarities\n  let similarities = [];\n  for (const item of imageEmbeddings) {\n    const similarity = tfjs.cos_sim(textEmbedding, item.embedding);\n    similarities.push({ item, similarity });\n  }\n\n  // Sort by similarity\n  similarities.sort((a, b) => b.similarity - a.similarity);\n\n  // Display results\n  for (const result of similarities) {\n    const resultDiv = createDiv();\n    resultDiv.style(\"display\", \"inline-block\");\n    resultDiv.style(\"margin\", \"10px\");\n    const img = createImg(result.item.url, result.item.id);\n    img.parent(resultDiv);\n    img.size(100, 100);\n    const scoreP = createP(`${result.similarity.toFixed(2)}`);\n    scoreP.parent(resultDiv);\n    resultDiv.parent(resultsDiv);\n  }\n  updateCanvas(\"Ready!\");\n}\n\n// Log model loading\nfunction logProgress(progress) {\n  if (progress.status === \"progress\") {\n    updateCanvas(`Loading models: ${progress.progress.toFixed(0)}%`);\n  }\n}\n\n// Update text\nfunction updateCanvas(statusText) {\n  background(220);\n  textSize(16);\n  textAlign(CENTER,CENTER);\n  fill(0);\n  text(statusText, width / 2, height / 2);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ba5ac40dcb5ce56db0",
+        "createdAt": "2025-04-07T22:30:58.528Z",
+        "updatedAt": "2025-04-07T22:30:58.528Z",
+        "id": "67f450ba5ac40dcb5ce56db0"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <!--     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js\"></script> -->\n    <script src=\"https://cdn.jsdelivr.net/npm/p5@2.0.0-beta.4/lib/p5.js\"></script>\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n    <meta charset=\"utf-8\" />\n  </head>\n  <body>\n    <main></main>\n    <script src=\"tf-helper.js\"></script>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ba5ac40dcb5ce56daf",
+        "createdAt": "2025-04-07T22:30:58.528Z",
+        "updatedAt": "2025-04-07T22:30:58.528Z",
+        "id": "67f450ba5ac40dcb5ce56daf"
+      },
+      {
+        "name": "style.css",
+        "content": "html,\nbody {\n  background-color: #FFF;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ba5ac40dcb5ce56db1",
+        "createdAt": "2025-04-07T22:30:58.528Z",
+        "updatedAt": "2025-04-07T22:30:58.528Z",
+        "id": "67f450ba5ac40dcb5ce56db1"
+      },
+      {
+        "name": "tf-helper.js",
+        "content": "// Global variables\nlet tfjs;\nlet textModel, visionModel, tokenizer, processor, cos_sim;\n\n\n// Load CLIP models\nasync function loadModels() {\n  \n  // Load transformers.js library\n  tfjs = await import(\n    \"https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.4.0\"\n  );\n  \n  // Destructure things we need\n  const {\n    AutoTokenizer,\n    AutoProcessor,\n    CLIPTextModelWithProjection,\n    CLIPVisionModelWithProjection,\n    RawImage,\n  } = tfjs;\n\n  statusText = \"Loading CLIP model...\";\n\n  // Load text model\n  tokenizer = await AutoTokenizer.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\"\n  );\n  textModel = await CLIPTextModelWithProjection.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\",\n    {\n      device: \"webgpu\",\n      dtype: \"fp32\",\n      progress_callback: logProgress,\n    }\n  );\n\n  // Load vision model\n  processor = await AutoProcessor.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\"\n  );\n  visionModel = await CLIPVisionModelWithProjection.from_pretrained(\n    \"Xenova/clip-vit-base-patch16\",\n    {\n      device: \"webgpu\",\n      dtype: \"fp32\",\n      progress_callback: logProgress,\n    }\n  );\n}\n\n// A single image embedding\nasync function computeImageEmbedding(imgURL) {\n  const image = await tfjs.RawImage.read(imgURL);\n  const imageInputs = await processor(image);\n  const { image_embeds } = await visionModel(imageInputs);\n  const embedding = image_embeds.normalize().tolist()[0];\n  return embedding;\n}\n\n// A single text embedding\nasync function computeTextEmbedding(query) {\n  // Compute text embedding\n  const textInputs = tokenizer([query], { padding: true, truncation: true });\n  const { text_embeds } = await textModel(textInputs);\n  const embedding = text_embeds.normalize().tolist()[0];\n  return embedding;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f450ba5ac40dcb5ce56db2",
+        "createdAt": "2025-04-07T22:30:58.528Z",
+        "updatedAt": "2025-04-07T22:30:58.528Z",
+        "id": "67f450ba5ac40dcb5ce56db2"
+      },
+      {
+        "name": "images.json",
+        "content": "{\n  \"images\": [\n    {\n      \"id\": \"0\",\n      \"url\": \"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"1\",\n      \"url\": \"https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"2\",\n      \"url\": \"https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"3\",\n      \"url\": \"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"4\",\n      \"url\": \"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"5\",\n      \"url\": \"https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"6\",\n      \"url\": \"https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"7\",\n      \"url\": \"https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"8\",\n      \"url\": \"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=512&h=512&fit=crop\"\n    },\n    {\n      \"id\": \"9\",\n      \"url\": \"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=512&h=512&fit=crop\"\n    }\n  ]\n}",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f450ba5ac40dcb5ce56dae",
+        "createdAt": "2025-04-07T22:30:58.528Z",
+        "updatedAt": "2025-04-07T22:30:58.528Z",
+        "id": "67f450ba5ac40dcb5ce56dae"
+      }
+    ],
+    "createdAt": "2025-04-07T22:24:58.155Z",
+    "updatedAt": "2025-04-07T22:30:58.528Z",
+    "id": "1XYsbrfer"
   },
   {
     "_id": "z_g178Pjx",
@@ -31368,6 +31957,63 @@
     "updatedAt": "2025-01-01T20:01:54.500Z",
     "createdAt": "2025-01-01T16:15:44.214Z",
     "id": "5vQTnni4V"
+  },
+  {
+    "_id": "2fBEx7UBz",
+    "name": "W8: createCapture() + Pixelation",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f7ec646ff384a83f95a16b",
+          "67f7ec646ff384a83f95a16c",
+          "67f7ec646ff384a83f95a16d"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f7ec646ff384a83f95a16a",
+        "createdAt": "2025-04-10T16:16:24.927Z",
+        "updatedAt": "2025-04-10T16:16:24.927Z",
+        "id": "67f7ec646ff384a83f95a16a"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Declare a variable to hold the video feed\nlet cam;\n\n// Declare and initialize the cell size of the pixelation\nlet cellSz = 40;\n\nlet curX = 0;\nlet curY = 0;\nlet nextX, nextY;\n\nfunction setup() {\n  createCanvas(640, 480);\n  \n  // Start the video feed\n  // Creates a p5.MediaElement object\n  cam = createCapture(VIDEO);\n  \n  // Hide the DOM element on the page\n  cam.hide();\n}\n\nfunction draw() {\n  background(220);\n  // console.log(cam)\n\n  // if (cam.loadPixels()) {\n    \n    // Load the pixels from the current frame of the video feed\n    cam.loadPixels();\n    if (cam.pixels[0] != 0) {\n      \n      // Loop through the image in 2-dimensions\n      for(let x = curX; x < curX+cellSz; x+=cellSz) {\n        for(let y = curY; y < curY+cellSz; y+=cellSz) {\n\n          // This is too slow\n          //let c = cam.get(x,y);\n\n          // Calculate the index number of the r-value of the pixel at x,y\n          let i = (y*width + x)*4;\n          let r = cam.pixels[i];\n          let g = cam.pixels[i+1];\n          let b = cam.pixels[i+2];\n\n          // Fill with the rgb values of the pixel at x,y\n          fill(r,g,b);\n\n          // Draw a big rect to represent this pixel \n          rect(x, y, cellSz, cellSz);\n        }\n      }\n      // noLoop();\n      newPage();\n      \n    }\n\n\n\n  // }\n  \n\n  // Draw the cam image to the canvas\n  //image(cam, 0, 0);\n  // noLoop()\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f7ec646ff384a83f95a16c",
+        "createdAt": "2025-04-10T16:16:24.927Z",
+        "updatedAt": "2025-04-10T16:16:24.927Z",
+        "id": "67f7ec646ff384a83f95a16c"
+      },
+      {
+        "name": "index.html",
+        "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js\"></script>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n    <meta charset=\"utf-8\" />\n\n  </head>\n  <body>\n    <main>\n    </main>\n    <script>\n    function newPage() {\n      window.open(\"https://www.w3schools.com\")\n      console.log(\"hi\")\n    }\n    </script>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f7ec646ff384a83f95a16b",
+        "createdAt": "2025-04-10T16:16:24.927Z",
+        "updatedAt": "2025-04-10T16:16:24.927Z",
+        "id": "67f7ec646ff384a83f95a16b"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f7ec646ff384a83f95a16d",
+        "createdAt": "2025-04-10T16:16:24.927Z",
+        "updatedAt": "2025-04-10T16:16:24.927Z",
+        "id": "67f7ec646ff384a83f95a16d"
+      }
+    ],
+    "createdAt": "2025-04-10T16:05:56.948Z",
+    "updatedAt": "2025-04-10T16:16:24.927Z",
+    "id": "2fBEx7UBz"
   },
   {
     "_id": "aXKWFynre",

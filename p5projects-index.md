@@ -1,5 +1,5 @@
 # FabriGu p5projects
-[449 sketches 2025-04-04T15:14:52.268Z](./downloads/gen/sketches_recent.md)
+[458 sketches 2025-04-11T15:26:06.690Z](./downloads/gen/sketches_recent.md)
 
 - [1millionThings\_0-dTD1pDp7L](./p5projects/1millionThings_0-dTD1pDp7L) [[p5js](https://editor.p5js.org/FabriGu/sketches/dTD1pDp7L)]
 - [1millionThings\_1-KaBJFLJ\_A](./p5projects/1millionThings_1-KaBJFLJ_A) [[p5js](https://editor.p5js.org/FabriGu/sketches/KaBJFLJ_A)]
@@ -121,6 +121,7 @@
 - [IsometricLasagna\_8-qqXWhEdom](./p5projects/IsometricLasagna_8-qqXWhEdom) [[p5js](https://editor.p5js.org/FabriGu/sketches/qqXWhEdom)]
 - [JsonGridAttempt claude-tUHwqo038](./p5projects/JsonGridAttempt%20claude-tUHwqo038) [[p5js](https://editor.p5js.org/FabriGu/sketches/tUHwqo038)]
 - [JsonGridAttempt-zQTQ74nX3](./p5projects/JsonGridAttempt-zQTQ74nX3) [[p5js](https://editor.p5js.org/FabriGu/sketches/zQTQ74nX3)]
+- [Jumpy air-V8CLWhatq](./p5projects/Jumpy%20air-V8CLWhatq) [[p5js](https://editor.p5js.org/FabriGu/sketches/V8CLWhatq)]
 - [L-systems-UPbCbBIc2](./p5projects/L-systems-UPbCbBIc2) [[p5js](https://editor.p5js.org/FabriGu/sketches/UPbCbBIc2)]
 - [LayersULayers\_C0-4f9a3dMei](./p5projects/LayersULayers_C0-4f9a3dMei) [[p5js](https://editor.p5js.org/FabriGu/sketches/4f9a3dMei)]
 - [LayersULayers\_C1-TPDJOlTlv](./p5projects/LayersULayers_C1-TPDJOlTlv) [[p5js](https://editor.p5js.org/FabriGu/sketches/TPDJOlTlv)]
@@ -179,9 +180,13 @@
 - [PrimitiveStoveTop-e88npe\_l5](./p5projects/PrimitiveStoveTop-e88npe_l5) [[p5js](https://editor.p5js.org/FabriGu/sketches/e88npe_l5)]
 - [PrimitiverStoveTopFLAMES-gjPTRmEYW](./p5projects/PrimitiverStoveTopFLAMES-gjPTRmEYW) [[p5js](https://editor.p5js.org/FabriGu/sketches/gjPTRmEYW)]
 - [Radial cerise-NQhQ4HsDP](./p5projects/Radial%20cerise-NQhQ4HsDP) [[p5js](https://editor.p5js.org/FabriGu/sketches/NQhQ4HsDP)]
+- [Semantic Search - Guccione.com Text Search V0-jmX\_VCR\_v](./p5projects/Semantic%20Search%20-%20Guccione.com%20Text%20Search%20V0-jmX_VCR_v) [[p5js](https://editor.p5js.org/FabriGu/sketches/jmX_VCR_v)]
+- [Semantic Search - Guccione.com Text Search V1-XDgg7hVTf](./p5projects/Semantic%20Search%20-%20Guccione.com%20Text%20Search%20V1-XDgg7hVTf) [[p5js](https://editor.p5js.org/FabriGu/sketches/XDgg7hVTf)]
 - [SerialComm Pot-8t18ishw-](./p5projects/SerialComm%20Pot-8t18ishw-) [[p5js](https://editor.p5js.org/FabriGu/sketches/8t18ishw-)]
 - [SerialComm speaker multi-pXoEtqUqy](./p5projects/SerialComm%20speaker%20multi-pXoEtqUqy) [[p5js](https://editor.p5js.org/FabriGu/sketches/pXoEtqUqy)]
 - [SerialComm speaker-LS2Ghbkak](./p5projects/SerialComm%20speaker-LS2Ghbkak) [[p5js](https://editor.p5js.org/FabriGu/sketches/LS2Ghbkak)]
+- [Simple Image Semantic Search - Guccione.com Image Search V0-aDC4s6UBQ](./p5projects/Simple%20Image%20Semantic%20Search%20-%20Guccione.com%20Image%20Search%20V0-aDC4s6UBQ) [[p5js](https://editor.p5js.org/FabriGu/sketches/aDC4s6UBQ)]
+- [Simple Image Semantic Search - Guccione.com Image Search V1-1XYsbrfer](./p5projects/Simple%20Image%20Semantic%20Search%20-%20Guccione.com%20Image%20Search%20V1-1XYsbrfer) [[p5js](https://editor.p5js.org/FabriGu/sketches/1XYsbrfer)]
 - [Sly bit-Vk9MGD9lT](./p5projects/Sly%20bit-Vk9MGD9lT) [[p5js](https://editor.p5js.org/FabriGu/sketches/Vk9MGD9lT)]
 - [Sound Oscillator Waveform copy-Pk2FtAa1-](./p5projects/Sound%20Oscillator%20Waveform%20copy-Pk2FtAa1-) [[p5js](https://editor.p5js.org/FabriGu/sketches/Pk2FtAa1-)]
 - [SpokenWardrobeV1-\_BCv3JyVv](./p5projects/SpokenWardrobeV1-_BCv3JyVv) [[p5js](https://editor.p5js.org/FabriGu/sketches/_BCv3JyVv)]
@@ -223,6 +228,7 @@
 - [VorHLines\_C3-y9xZVJuQR](./p5projects/VorHLines_C3-y9xZVJuQR) [[p5js](https://editor.p5js.org/FabriGu/sketches/y9xZVJuQR)]
 - [VorHLines\_C4-m3BLefavO](./p5projects/VorHLines_C4-m3BLefavO) [[p5js](https://editor.p5js.org/FabriGu/sketches/m3BLefavO)]
 - [VorHLines\_C5\_3D-5vQTnni4V](./p5projects/VorHLines_C5_3D-5vQTnni4V) [[p5js](https://editor.p5js.org/FabriGu/sketches/5vQTnni4V)]
+- [W8 createCapture() + Pixelation-2fBEx7UBz](./p5projects/W8%20createCapture()%20%2B%20Pixelation-2fBEx7UBz) [[p5js](https://editor.p5js.org/FabriGu/sketches/2fBEx7UBz)]
 - [Wave Distortion filter-aXKWFynre](./p5projects/Wave%20Distortion%20filter-aXKWFynre) [[p5js](https://editor.p5js.org/FabriGu/sketches/aXKWFynre)]
 - [WhisperLoopV0-6thjPTk0t](./p5projects/WhisperLoopV0-6thjPTk0t) [[p5js](https://editor.p5js.org/FabriGu/sketches/6thjPTk0t)]
 - [WhisperLoopV1-3gH\_72ayd](./p5projects/WhisperLoopV1-3gH_72ayd) [[p5js](https://editor.p5js.org/FabriGu/sketches/3gH_72ayd)]
@@ -326,6 +332,7 @@
 - [gridBased\_3-CCS2BV-4r](./p5projects/gridBased_3-CCS2BV-4r) [[p5js](https://editor.p5js.org/FabriGu/sketches/CCS2BV-4r)]
 - [icm\_pixels copy-0wDN4zPFF](./p5projects/icm_pixels%20copy-0wDN4zPFF) [[p5js](https://editor.p5js.org/FabriGu/sketches/0wDN4zPFF)]
 - [ims-02 recursiveCircle Fullscreen-MJOQaofdp](./p5projects/ims-02%20recursiveCircle%20Fullscreen-MJOQaofdp) [[p5js](https://editor.p5js.org/FabriGu/sketches/MJOQaofdp)]
+- [ims03-fabri-5y2x84BeB](./p5projects/ims03-fabri-5y2x84BeB) [[p5js](https://editor.p5js.org/FabriGu/sketches/5y2x84BeB)]
 - [infinite tunnel-H0LaAsBXd](./p5projects/infinite%20tunnel-H0LaAsBXd) [[p5js](https://editor.p5js.org/FabriGu/sketches/H0LaAsBXd)]
 - [infiniteScroll\_0-zxO-BuIT7](./p5projects/infiniteScroll_0-zxO-BuIT7) [[p5js](https://editor.p5js.org/FabriGu/sketches/zxO-BuIT7)]
 - [infiniteScroll\_1-tXBkg5LkS](./p5projects/infiniteScroll_1-tXBkg5LkS) [[p5js](https://editor.p5js.org/FabriGu/sketches/tXBkg5LkS)]
@@ -378,6 +385,8 @@
 - [p5.comfyui-helper Hello World \[firstExample\]-sBGqAfbEU](./p5projects/p5.comfyui-helper%20Hello%20World%20%5BfirstExample%5D-sBGqAfbEU) [[p5js](https://editor.p5js.org/FabriGu/sketches/sBGqAfbEU)]
 - [pixelFreezeV1-w1-Sxh9y-](./p5projects/pixelFreezeV1-w1-Sxh9y-) [[p5js](https://editor.p5js.org/FabriGu/sketches/w1-Sxh9y-)]
 - [pixelFreezeV2-K8oAghdvp](./p5projects/pixelFreezeV2-K8oAghdvp) [[p5js](https://editor.p5js.org/FabriGu/sketches/K8oAghdvp)]
+- [procedural circuit diagram V0-i60-W2eZN](./p5projects/procedural%20circuit%20diagram%20V0-i60-W2eZN) [[p5js](https://editor.p5js.org/FabriGu/sketches/i60-W2eZN)]
+- [procedural circuit diagram V1-KChUe9Y\_d](./p5projects/procedural%20circuit%20diagram%20V1-KChUe9Y_d) [[p5js](https://editor.p5js.org/FabriGu/sketches/KChUe9Y_d)]
 - [projectionMapClothes-b6iq4hNfK](./p5projects/projectionMapClothes-b6iq4hNfK) [[p5js](https://editor.p5js.org/FabriGu/sketches/b6iq4hNfK)]
 - [projectionMapClothes\_0-flJC2dDQn](./p5projects/projectionMapClothes_0-flJC2dDQn) [[p5js](https://editor.p5js.org/FabriGu/sketches/flJC2dDQn)]
 - [projectionMapClothes\_1-qL7Aut3Gu](./p5projects/projectionMapClothes_1-qL7Aut3Gu) [[p5js](https://editor.p5js.org/FabriGu/sketches/qL7Aut3Gu)]

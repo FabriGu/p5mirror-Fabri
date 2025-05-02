@@ -17,7 +17,7 @@ async function setup() {
   chatP = createP();
   conversationHistory.push({
     role: "system",
-    content: "You are ",
+    content: "You are a hater",
   });
 
   // Load the Transformers.js model pipeline
